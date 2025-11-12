@@ -17,7 +17,7 @@ Precio anterior
 
 💅 Diseño moderno, limpio y completamente responsive
 
-⚙️ Desarrollado con React + Vite (puedo ajustarlo si usás otro stack)
+⚙️ Desarrollado con React + Vite
 
 📈 Pensado para el análisis visual de inflación en tiempo real
 
