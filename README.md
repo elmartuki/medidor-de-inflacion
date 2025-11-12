@@ -1,16 +1,26 @@
-# React + Vite
+🧾 Medidor de Inflación Argentina
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Medidor de Inflación Argy es una aplicación web que permite visualizar de forma clara y actualizada las variaciones de precios de productos de la canasta básica en Argentina.
+El proyecto muestra las variaciones semanales y mensuales de los precios, ayudando a seguir la evolución de la inflación día a día.
 
-Currently, two official plugins are available:
+✨ Características principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📊 Panel con tarjetas de productos mostrando:
 
-## React Compiler
+Precio actual
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Variación porcentual respecto a la semana anterior
 
-## Expanding the ESLint configuration
+Precio anterior
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🟥🟩 Colores dinámicos según si el precio subió o bajó
+
+💅 Diseño moderno, limpio y completamente responsive
+
+⚙️ Desarrollado con React + Vite (puedo ajustarlo si usás otro stack)
+
+📈 Pensado para el análisis visual de inflación en tiempo real
+
+🚀 Deploy
+
+Disponible en: https://medidor-de-inflacion-argy.vercel.app/
