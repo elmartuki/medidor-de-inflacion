@@ -1,8 +1,25 @@
-import React from "react";
-import { productos } from "../db/products";
+import { useEffect, useState } from "react";
 import "../css/productsCards.css";
+import { obtenerDelLocalStorage } from "../utils/localStorage";
 
 export default function ArticlesCards() {
+  const [productos, setProductos] = useState([]);
+  const [actualizarProductos, setActualizarProductos] = useState([]);
+
+  useEffect(() => {
+    const data = obtenerDelLocalStorage("Productos") || [];
+    setProductos(data);
+  }, []);
+
+  useEffect(() => {
+    const invervalo = setInterval(() => {
+      const nuevosProductos = obtenerDelLocalStorage("Productos");
+      setProductos(nuevosProductos);
+    }, 1000);
+
+    return () => clearInterval(invervalo);
+  }, [productos]);
+
   return (
     <>
       <p className="productos-section_title">Listado de productos</p>
