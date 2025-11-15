@@ -1,0 +1,10 @@
+.productos-admin-section {
+  margin-top: 20px;
+  .search-input {
+    width: 100%;
+    background-color: transparent;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.623);
+  }
+}

@@ -3,9 +3,14 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  font-size: 1rem;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 body {
   background-color: #161616;
+}
+
+button {
+  cursor: pointer;
 }

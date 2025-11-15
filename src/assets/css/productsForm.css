@@ -1,0 +1,102 @@
+.product-create-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+
+  .product-create-btn {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.715);
+    border-radius: 8px;
+    padding: 5px 10px;
+  }
+}
+
+.productos-admin-section {
+  display: flex;
+  width: 95%;
+  margin: auto;
+  border-radius: 8px;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+
+  .productos-form {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    border-radius: 8px;
+    width: 100%;
+    padding: 10px;
+    gap: 10px;
+
+    input {
+      width: 100%;
+      padding: 5px 10px;
+      border: none;
+      outline: none;
+      border-left: 3px solid red;
+      background-color: #242424;
+    }
+
+    button {
+      background-color: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.918);
+    }
+
+    .btn-form {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      .btn-editar {
+        width: 50%;
+        border: 2px solid green;
+        border-radius: 8px;
+        img {
+          width: 20px;
+        }
+      }
+
+      .btn-guardar {
+        width: 100%;
+        border-radius: 8px;
+        padding: 5px 10px;
+      }
+
+      .btn-borrar {
+        width: 50%;
+        border: 2px solid rgb(128, 0, 0);
+        border-radius: 8px;
+
+        img {
+          width: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .productos-admin-section {
+    flex-wrap: wrap;
+    flex-direction: row;
+    .productos-form {
+      width: 48%;
+    }
+
+    .productos-form {
+      width: 50%;
+      margin: auto;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .productos-admin-section {
+    .productos-form {
+      width: 32%;
+    }
+  }
+}
