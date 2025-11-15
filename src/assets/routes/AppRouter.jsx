@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import InitPage from "../pages/InitPage";
-import AdminPage from "../pages/adminPage";
+import AdminPage from "../../pages/adminPage.jsx";
 
 export default function AppRouter() {
   return (
