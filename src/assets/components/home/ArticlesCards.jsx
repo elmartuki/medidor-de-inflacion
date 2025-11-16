@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "../css/productsCards.css";
-import { obtenerDelLocalStorage } from "../utils/localStorage";
+import "../../css/productsCards.css";
+import { obtenerDelLocalStorage } from "../../utils/localStorage";
 
 export default function ArticlesCards() {
   const [productos, setProductos] = useState([]);
@@ -40,16 +40,21 @@ export default function ArticlesCards() {
               producto.precio_semana_1) *
             100;
 
-          console.log(variacion);
-
           return (
             <article
               className={
-                variacion < 0
+                variacion > 20
+                  ? "productos-card_fuego"
+                  : variacion > 0
+                  ? "productos-card_positive"
+                  : variacion > -20
                   ? "productos-card_negative"
-                  : "productos-card_positive"
+                  : "productos-card_piano"
               }
             >
+              <div className="productos-card_emoji">
+                {variacion < -20 ? <p>🎹</p> : variacion > 20 ? <p>🔥</p> : ""}
+              </div>
               <div className="productos-card_name-price">
                 <p>{nombre}</p>
 

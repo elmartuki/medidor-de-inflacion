@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "../css/importantCard.css";
-import upArrow from "../img/upArrow.svg";
-import downArrow from "../img/downArrow.svg";
-import { importantVariant } from "../db/importantVariants";
+import "../../css/importantCard.css";
+import upArrow from "../..//img/upArrow.svg";
+import downArrow from "../..//img/downArrow.svg";
+import { importantVariant } from "../../db/importantVariants";
 
 export default function ImportantCards() {
   return (
