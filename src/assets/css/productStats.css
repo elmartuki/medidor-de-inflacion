@@ -1,0 +1,49 @@
+.stats_section {
+  width: 95%;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .stats-card-negative {
+    outline: 2px solid rgb(141, 0, 0);
+  }
+
+  .stats-card-positive {
+    outline: 2px solid green;
+  }
+
+  .stats-card-negative,
+  .stats-card-positive {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 48%;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: #202020;
+
+    .stats-card_data {
+      display: flex;
+      div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .stats_section {
+    .stats-card-negative,
+    .stats-card-positive {
+      width: 25%;
+    }
+  }
+}
