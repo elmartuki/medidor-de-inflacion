@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import InitPage from "../pages/InitPage";
 import AdminPage from "../pages/AdminPage";
-import Side_bar from "../components/sidebar/Side_bar";
-import Weeks_admin from "../components/admin/Weeks_admin";
+import Side_bar from "../components/sidebar/Aside";
+import WeeksPage from "../pages/WeeksPage";
 
 export default function AppRouter() {
   return (
@@ -20,8 +20,10 @@ export default function AppRouter() {
         path="/admin"
         element={
           <>
-            <Side_bar />
-            <AdminPage />
+            <div style={{ display: "flex" }}>
+              <Side_bar />
+              <AdminPage />
+            </div>
           </>
         }
       ></Route>
@@ -29,8 +31,11 @@ export default function AppRouter() {
         path="/weeks"
         element={
           <>
-            <Side_bar />
-            <Weeks_admin />
+            <div style={{ display: "flex" }}>
+              {" "}
+              <Side_bar />
+              <WeeksPage />
+            </div>
           </>
         }
       ></Route>

@@ -1,0 +1,34 @@
+aside {
+  width: 10%;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  background-color: #191919;
+  display: none;
+
+  .aside-title {
+    text-align: center;
+    margin: 20px 0px;
+  }
+
+  .aside-elements {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+
+    a {
+      width: 90%;
+      padding: 5px 10px;
+      background-color: #262626;
+      border-radius: 6px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  aside {
+    display: block;
+  }
+}

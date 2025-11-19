@@ -6,10 +6,16 @@
   gap: 15px;
 
   .product-create-btn {
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.715);
+    background-color: #0d00b2;
     border-radius: 8px;
     padding: 5px 10px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -23,57 +29,118 @@
   align-items: center;
 
   .productos-form {
-    width: 95%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     background-color: #202020;
     border-radius: 8px;
-    width: 100%;
     padding: 10px;
     gap: 10px;
 
     input {
-      width: 100%;
-      padding: 5px 10px;
-      border: none;
-      outline: none;
-      border-left: 3px solid red;
-      background-color: #242424;
+      width: 50%;
+    }
+
+    .productos-form_name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 5px;
+      border-bottom: 2px solid #282828;
+
+      input {
+        width: 100%;
+        background-color: #202020;
+        border: none;
+        color: white;
+      }
+
+      .btn-form {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+
+        .btn-editar,
+        .btn-borrar {
+          width: 50%;
+          border-radius: 8px;
+          padding: 5px 10px;
+        }
+
+        .btn-editar {
+          background-color: #262626;
+          border: none;
+
+          img {
+            width: 20px;
+          }
+        }
+
+        .btn-borrar {
+          background-color: #282828;
+          border: none;
+
+          img {
+            width: 20px;
+          }
+        }
+      }
+    }
+
+    .productos-form_inputs-section {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 5px;
+      gap: 10px;
+      .productos-form_inputs {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+
+        div {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          width: 100%;
+
+          input {
+            width: 50%;
+          }
+
+          .productos-form_inputs_name {
+            width: 50%;
+          }
+
+          p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.806);
+          }
+        }
+
+        input {
+          width: 50%;
+          padding: 5px 10px;
+          border: none;
+          outline: none;
+          background-color: #282828;
+          border-radius: 6px;
+          color: white;
+        }
+      }
     }
 
     button {
       background-color: transparent;
-      border: 2px solid rgba(255, 255, 255, 0.918);
+      border: 2px solid #ffffff75;
+      border-radius: 6px;
+      padding: 5px 10px;
     }
 
-    .btn-form {
+    .btn-guardar {
       width: 100%;
-      display: flex;
-      gap: 10px;
-      .btn-editar {
-        width: 50%;
-        border: 2px solid green;
-        border-radius: 8px;
-        img {
-          width: 20px;
-        }
-      }
-
-      .btn-guardar {
-        width: 100%;
-        border-radius: 8px;
-        padding: 5px 10px;
-      }
-
-      .btn-borrar {
-        width: 50%;
-        border: 2px solid rgb(128, 0, 0);
-        border-radius: 8px;
-
-        img {
-          width: 20px;
-        }
-      }
+      border-radius: 8px;
+      padding: 5px 10px;
     }
   }
 }
