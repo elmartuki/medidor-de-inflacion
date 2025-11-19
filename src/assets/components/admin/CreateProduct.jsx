@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addProducts } from "../../services/addProduct";
+import "../../css/createProducts.css";
 
 export default function CreateProducto({ openForm, closeForm }) {
   const [nombre, setNombre] = useState("");
@@ -12,9 +13,15 @@ export default function CreateProducto({ openForm, closeForm }) {
 
   if (openForm) {
     return (
-      <section className="productos-admin-section">
+      <section
+        className="productos-create-section"
+        onClick={() => {
+          closeForm();
+        }}
+      >
         <form
-          className="productos-form"
+          className="productos-form-create"
+          onClick={(event) => event.stopPropagation()}
           onSubmit={() => {
             addProducts(
               event,
@@ -30,6 +37,7 @@ export default function CreateProducto({ openForm, closeForm }) {
             closeForm();
           }}
         >
+          <p>Crear un producto</p>
           <input
             type="text"
             placeholder="Escribí el nombre del producto"

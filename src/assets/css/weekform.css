@@ -1,0 +1,46 @@
+.week-form-section {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  background: #00000066;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  .week-form {
+    display: flex;
+    width: 70%;
+    border-radius: 6px;
+    gap: 10px;
+    flex-direction: column;
+    background-color: #181818;
+    padding: 20px;
+
+    input {
+      background-color: #202020;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: transparent;
+      border: 2px solid white;
+      border-radius: 6px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .week-form-section {
+    align-items: baseline;
+    .week-form {
+      padding: 40px;
+      gap: 20px;
+      margin: 10% 0px;
+      width: 30%;
+    }
+  }
+}

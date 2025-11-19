@@ -1,7 +1,7 @@
 .productos-section_title {
-  text-align: center;
-  margin: 20px 0px;
   font-size: 1.5rem;
+  display: flex;
+  align-self: flex-start;
 }
 
 .productos-section {
