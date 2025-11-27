@@ -4,6 +4,7 @@ import InitPage from "../pages/InitPage";
 import AdminPage from "../pages/AdminPage";
 import Side_bar from "../components/sidebar/Aside";
 import WeeksPage from "../pages/WeeksPage";
+import LoginPage from "../pages/loginPage";
 
 export default function AppRouter() {
   return (
@@ -13,6 +14,14 @@ export default function AppRouter() {
         element={
           <>
             <InitPage />
+          </>
+        }
+      ></Route>
+      <Route
+        path="/auth"
+        element={
+          <>
+            <LoginPage />
           </>
         }
       ></Route>
