@@ -4,7 +4,7 @@ import InitPage from "../pages/InitPage";
 import AdminPage from "../pages/AdminPage";
 import Side_bar from "../components/sidebar/Aside";
 import WeeksPage from "../pages/WeeksPage";
-import LoginPage from "../pages/loginPage";
+import LoginPage from "../pages/LoginPage";
 
 export default function AppRouter() {
   return (
