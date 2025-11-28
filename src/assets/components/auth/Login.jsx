@@ -30,7 +30,7 @@ export default function Login() {
       console.error("Error al conectar con el servicor");
       alert("Error al conectar con el servidor");
     }
-  };
+  }; 
 
   return (
     <section>

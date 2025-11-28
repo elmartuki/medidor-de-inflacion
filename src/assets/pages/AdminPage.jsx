@@ -1,9 +1,14 @@
 import Products_admin from "../components/admin/Products_admin";
+import { getProducts } from "../services/getProducts";
 
 export default function AdminPage() {
+  const { productos, obtenerProductos } = getProducts();
   return (
     <>
-      <Products_admin />
+      <Products_admin
+        listaDeProductos={productos}
+        onProductUpdate={obtenerProductos}
+      />
     </>
   );
 }

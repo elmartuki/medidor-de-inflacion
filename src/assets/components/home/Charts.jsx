@@ -17,12 +17,10 @@ import {
   filtrarSemanas,
 } from "../../utils/inflacion.js";
 
-export default function Grafica() {
+export default function Charts() {
   const [filtro, setFiltro] = useState("all");
 
- 
   const semanasFiltradas = filtrarSemanas(semanas, filtro);
-
 
   const dataFiltrada = calcularInflacionAcumulada(semanasFiltradas);
 
@@ -76,7 +74,6 @@ export default function Grafica() {
               labelStyle={{ color: "#0f0" }}
             />
 
-        
             <Area
               type="monotone"
               dataKey="acumulado"
@@ -84,7 +81,6 @@ export default function Grafica() {
               fill="url(#greenGradient)"
             />
 
-        
             <Line
               type="monotone"
               dataKey="acumulado"
