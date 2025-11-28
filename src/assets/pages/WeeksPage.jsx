@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { obtenerDelLocalStorage } from "../utils/localStorage";
 import add from "../img/add.svg";
 import CreateWeeks from "../components/admin/CreateWeeks";
 import ShowWeeks from "../components/admin/ShowWeeks";
@@ -8,9 +7,7 @@ export default function WeeksPage() {
   const [openCreate, setOpenCreate] = useState(false);
   const [search, setSearch] = useState("");
 
-  const [semanas, setSemanas] = useState(
-    obtenerDelLocalStorage("Semanas") || []
-  );
+  const [semanas, setSemanas] = useState();
 
   return (
     <section className="weeks-section">

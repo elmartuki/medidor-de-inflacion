@@ -1,14 +1,34 @@
-import { guardarEnLocalStorage } from "../utils/localStorage";
+export async function handleDelete(index, productos) {
+  const productoAEliminar = productos[index];
+  const productoID = productoAEliminar._id;
 
-export function handleDelete(nombre, productos, setProductos) {
+  const datosActualizados = productoAEliminar;
+
   const confirmar = confirm("¿Estás seguro que querés eliminar este producto?");
 
   if (confirmar) {
-    const nuevoListado = productos.filter(
-      (producto) => producto.nombre !== nombre
-    );
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/productos/${productoID}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datosActualizados),
+        }
+      );
 
-    setProductos(nuevoListado);
-    guardarEnLocalStorage("Productos", nuevoListado);
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Se elimino el producto correctamente");
+      } else {
+        alert("Error al elimina el producto");
+      }
+    } catch (error) {
+      console.error("Error al conectar con el servicor");
+      alert("Error al conectar con el servidor");
+    }
   }
 }

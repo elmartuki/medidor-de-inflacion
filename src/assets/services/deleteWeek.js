@@ -1,20 +1,17 @@
-import {
-  guardarEnLocalStorage,
-  obtenerDelLocalStorage,
-} from "../utils/localStorage";
+
 
 export function handleDeleteWeek(event, week) {
-  event.preventDefault();
+  // event.preventDefault();
 
-  const deleteWeek = confirm("Estas seguro que quieres eliminar esta semana?");
+  // const deleteWeek = confirm("Estas seguro que quieres eliminar esta semana?");
 
-  const semanaList = obtenerDelLocalStorage("Semanas");
+  // const semanaList = obtenerDelLocalStorage("Semanas");
 
-  if (deleteWeek) {
-    const nuevoListado = semanaList.filter((semana) => {
-      return semana.week !== week;
-    });
-    guardarEnLocalStorage("Semanas", nuevoListado);
-  }
+  // if (deleteWeek) {
+  //   const nuevoListado = semanaList.filter((semana) => {
+  //     return semana.week !== week;
+  //   });
+  //   guardarEnLocalStorage("Semanas", nuevoListado);
+  // }
 }
 

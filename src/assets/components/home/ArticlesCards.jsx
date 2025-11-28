@@ -1,25 +1,6 @@
-import { useEffect, useState } from "react";
 import "../../css/productsCards.css";
-import { obtenerDelLocalStorage } from "../../utils/localStorage";
 
-export default function ArticlesCards() {
-  const [productos, setProductos] = useState([]);
-  const [actualizarProductos, setActualizarProductos] = useState([]);
-
-  useEffect(() => {
-    const data = obtenerDelLocalStorage("Productos") || [];
-    setProductos(data);
-  }, []);
-
-  useEffect(() => {
-    const invervalo = setInterval(() => {
-      const nuevosProductos = obtenerDelLocalStorage("Productos");
-      setProductos(nuevosProductos);
-    }, 1000);
-
-    return () => clearInterval(invervalo);
-  }, [productos]);
-
+export default function ArticlesCards({ productos }) {
   return (
     <>
       <p className="productos-section_title">Listado de productos</p>
@@ -28,16 +9,16 @@ export default function ArticlesCards() {
           const {
             nombre,
             precio_hoy,
-            precio_semana_1,
-            precio_semana_2,
-            precio_semana_3,
-            precio_1_mes,
+            precio_1_semana,
+            precio_2_semanas,
+            precio_3_semanas,
+            precio_4_semanas,
             precio_11_24,
           } = producto;
 
           const variacion =
-            ((producto.precio_hoy - producto.precio_semana_1) /
-              producto.precio_semana_1) *
+            ((producto.precio_hoy - producto.precio_1_semana) /
+              producto.precio_1_semana) *
             100;
 
           return (
@@ -62,7 +43,7 @@ export default function ArticlesCards() {
               </div>
               <div className="productos-card_variacion">
                 <p>{variacion.toFixed(2)}% - Ult. 7 dias</p>
-                <p>Precio anterior: ${precio_semana_1}</p>
+                <p>Precio anterior: ${precio_1_semana}</p>
               </div>
             </article>
           );

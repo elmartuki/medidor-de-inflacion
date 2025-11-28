@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ImportantCards from "../components/home/ImportantCards";
 import ArticlesCards from "../components/home/ArticlesCards";
 import Stats from "../components/home/Stats";
-import { obtenerDelLocalStorage } from "../utils/localStorage";
 import Charts from "../components/home/Charts";
+import { getProducts } from "../services/getProducts";
 
 export default function InitPage() {
-  const productos = obtenerDelLocalStorage("Productos") || [];
+  const { productos } = getProducts();
+
   return (
     <>
       <ImportantCards />
       <Stats productos={productos} />
       <Charts />
-      <ArticlesCards />
+      <ArticlesCards productos={productos} />
     </>
   );
 }

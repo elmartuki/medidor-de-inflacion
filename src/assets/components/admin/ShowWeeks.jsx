@@ -3,7 +3,7 @@ import deleteIcon from "../../img/delete.svg";
 import editIcon from "../../img/edit.svg";
 import "../../css/weeksection.css";
 import { useState } from "react";
-import { handleChange, handleSubmit } from "../../services/editWeek";
+// import { handleChange, handleSubmit } from "../../services/editWeek";
 import { handleDeleteWeek } from "../../services/deleteWeek";
 
 export default function ShowWeeks({ semanas, setSemanas, search }) {
