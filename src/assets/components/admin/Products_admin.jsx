@@ -34,6 +34,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
 
           <CreateProducto
             openForm={openCreate}
+            onProductUpdate={onProductUpdate}
             closeForm={() => setOpenCreate(false)}
           />
         </section>
@@ -91,7 +92,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                         </button>
                         <button
                           onClick={() => {
-                            handleDelete(index, productos);
+                            handleDelete(producto, onProductUpdate);
                           }}
                           type="button"
                           className="btn-borrar"

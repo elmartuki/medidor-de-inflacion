@@ -3,17 +3,22 @@ import deleteIcon from "../../img/delete.svg";
 import editIcon from "../../img/edit.svg";
 import "../../css/weeksection.css";
 import { useState } from "react";
-// import { handleChange, handleSubmit } from "../../services/editWeek";
+import { handleChange, handleSubmit } from "../../services/editWeek";
 import { handleDeleteWeek } from "../../services/deleteWeek";
 
-export default function ShowWeeks({ semanas, setSemanas, search }) {
+export default function ShowWeeks({
+  listaDeSemanas,
+  setSemanas,
+  onSemanasUpdate,
+  search,
+}) {
   const [editIndex, setEditIndex] = useState(null);
 
-  const listToShow = searchWeek(search, semanas);
+  const listToShow = searchWeek(search, listaDeSemanas);
 
   return listToShow.map((semana) => {
-    const index = semanas.indexOf(semana);
-    const { week, variacion } = semana;
+    const index = listaDeSemanas.indexOf(semana);
+    const { semana: week, variacion } = semana;
 
     return (
       <form
@@ -22,7 +27,13 @@ export default function ShowWeeks({ semanas, setSemanas, search }) {
         onSubmit={(event) => {
           event.preventDefault();
           const edit = editIndex === index;
-          handleSubmit({ index, edit }, semana, semanas, setSemanas);
+
+          handleSubmit(
+            { index, edit },
+            listaDeSemanas,
+            setSemanas,
+            onSemanasUpdate
+          );
         }}
       >
         <div className="weeks-card_title">
@@ -34,9 +45,10 @@ export default function ShowWeeks({ semanas, setSemanas, search }) {
               onChange={(event) =>
                 handleChange(
                   index,
-                  "week",
+                  "semana",
                   event.target.value,
-                  semanas,
+
+                  listaDeSemanas,
                   setSemanas
                 )
               }
@@ -54,7 +66,7 @@ export default function ShowWeeks({ semanas, setSemanas, search }) {
 
             <button
               className="delete-btn"
-              onClick={(e) => handleDeleteWeek(e, week, semanas, setSemanas)}
+              onClick={(e) => handleDeleteWeek(e, semana._id, onSemanasUpdate)}
             >
               <img src={deleteIcon} />
             </button>
@@ -69,7 +81,8 @@ export default function ShowWeeks({ semanas, setSemanas, search }) {
               index,
               "variacion",
               e.target.value,
-              semanas,
+
+              listaDeSemanas,
               setSemanas
             )
           }

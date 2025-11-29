@@ -1,17 +1,25 @@
+export async function handleDeleteWeek(event, id, onSemanasUpdate) {
+  event.preventDefault();
 
+  try {
+    const response = await fetch(`http://localhost:3000/api/semanas/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-export function handleDeleteWeek(event, week) {
-  // event.preventDefault();
+    if (response.ok) {
+      alert("Se eliminó la semana correctamente");
 
-  // const deleteWeek = confirm("Estas seguro que quieres eliminar esta semana?");
-
-  // const semanaList = obtenerDelLocalStorage("Semanas");
-
-  // if (deleteWeek) {
-  //   const nuevoListado = semanaList.filter((semana) => {
-  //     return semana.week !== week;
-  //   });
-  //   guardarEnLocalStorage("Semanas", nuevoListado);
-  // }
+      if (onSemanasUpdate) {
+        await onSemanasUpdate();
+      }
+    } else {
+      alert("Error al eliminar la semana");
+    }
+  } catch (error) {
+    console.error("Error al conectar con el servidor", error);
+    alert("Error al conectar con el servidor");
+  }
 }
-
