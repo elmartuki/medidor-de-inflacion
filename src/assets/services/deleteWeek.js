@@ -10,13 +10,10 @@ export async function handleDeleteWeek(event, id, onSemanasUpdate) {
     });
 
     if (response.ok) {
-      alert("Se eliminó la semana correctamente");
-
       if (onSemanasUpdate) {
         await onSemanasUpdate();
       }
     } else {
-      alert("Error al eliminar la semana");
     }
   } catch (error) {
     console.error("Error al conectar con el servidor", error);

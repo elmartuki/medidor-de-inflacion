@@ -6,7 +6,7 @@ export async function handleSubmit(event, index, productos) {
 
   const datosActualizados = productoAEditar;
 
-  alert(`Producto "${productoAEditar.nombre}" actualizado con éxito`);
+ 
 
   try {
     const response = await fetch(
@@ -23,9 +23,9 @@ export async function handleSubmit(event, index, productos) {
     const data = await response.json();
 
     if (response.ok) {
-      alert("Se agrego un producto correctamente");
+     
     } else {
-      alert("Error al agregar un producto");
+    
     }
   } catch (error) {
     console.error("Error al conectar con el servicor");

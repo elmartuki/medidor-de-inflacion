@@ -33,13 +33,13 @@ export async function addProducts(
     const data = await response.json();
 
     if (response.ok) {
-      alert("Se agrego un producto correctamente");
+      
 
       if (onProductUpdate) {
         await onProductUpdate();
       }
     } else {
-      alert("Error al agregar un producto");
+     
     }
   } catch (error) {
     console.error("Error al conectar con el servicor");

@@ -18,13 +18,13 @@ export async function handleDelete(producto, onProductUpdate) {
       );
 
       if (response.ok) {
-        alert("Se eliminó el producto correctamente");
+       
 
         if (onProductUpdate) {
           await onProductUpdate();
         }
       } else {
-        alert("Error al eliminar el producto");
+      
       }
     } catch (error) {
       console.error("Error al conectar con el servidor", error);

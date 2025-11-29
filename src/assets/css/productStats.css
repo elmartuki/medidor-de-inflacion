@@ -4,7 +4,7 @@
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
 
   .stats-card-negative {
     outline: 2px solid rgb(141, 0, 0);
