@@ -2,6 +2,7 @@ import {
   crearProductosServices,
   editarProductosServices,
   eliminarProductoService,
+  movePriceHistoryServices,
   obtenerProductosServices,
 } from "../services/productosServices.js";
 
@@ -29,5 +30,10 @@ export const editarProductosController = async (req, res) => {
 export const eliminarProductoController = async (req, res) => {
   const id = req.params.id;
   const { json, statusCode } = await eliminarProductoService(id);
+  res.status(statusCode).json(json);
+};
+
+export const movePriceHistoryController = async (req, res) => {
+  const { json, statusCode } = await movePriceHistoryServices();
   res.status(statusCode).json(json);
 };

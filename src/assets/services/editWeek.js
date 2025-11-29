@@ -11,8 +11,6 @@ export async function handleSubmit(
 
   const datosActualizados = semanaAEditar;
 
-  alert(`Producto "${semanaAEditar.semana}" actualizado con éxito`);
-
   try {
     const response = await fetch(
       `http://localhost:3000/api/semanas/${semanaID}`,
@@ -28,9 +26,7 @@ export async function handleSubmit(
     const data = await response.json();
 
     if (response.ok) {
-      alert("Se edito una semana correctamente");
     } else {
-      alert("Error al editar una semana");
     }
   } catch (error) {
     console.error("Error al conectar con el servicor");

@@ -9,6 +9,7 @@ import { handleSearch } from "../../services/search";
 import { handleChange, handleSubmit } from "../../services/editProduct";
 import { handleDelete } from "../../services/deleteProduct";
 import CreateProducto from "./CreateProduct";
+import { updatePriceHistory } from "../../services/moverPrecios";
 
 export default function Products_admin({ listaDeProductos, onProductUpdate }) {
   const [productos, setProductos] = useState(listaDeProductos);
@@ -18,6 +19,14 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
   useEffect(() => {
     setProductos(listaDeProductos);
   }, [listaDeProductos]);
+
+  const handlePriceMove = async () => {
+    const cofirmar = confirm("Desea mover los precios?");
+
+    if (cofirmar) {
+      await updatePriceHistory(onProductUpdate);
+    }
+  };
 
   const listToShow = handleSearch(search, productos || []);
 
@@ -41,6 +50,11 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
 
         <section className="productos-admin-section">
           <p className="productos-section_title">Listado de productos</p>
+
+          <button className="price-move-btn" onClick={handlePriceMove}>
+            Mover Precios
+          </button>
+
           <input
             className="search-input"
             type="text"

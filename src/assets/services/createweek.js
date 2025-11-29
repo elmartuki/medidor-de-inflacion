@@ -13,8 +13,6 @@ export async function createWeek(event, week, variacion, onSemanasUpdate) {
     });
 
     if (response.ok) {
-      alert("Se agrego una semana correctamente");
-
       if (onSemanasUpdate) {
         await onSemanasUpdate();
       }
