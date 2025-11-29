@@ -1,10 +1,9 @@
-export async function handleDelete(index, productos) {
-  const productoAEliminar = productos[index];
-  const productoID = productoAEliminar._id;
+export async function handleDelete(producto, onProductUpdate) {
+  const productoID = producto._id;
 
-  const datosActualizados = productoAEliminar;
-
-  const confirmar = confirm("¿Estás seguro que querés eliminar este producto?");
+  const confirmar = confirm(
+    `¿Estás seguro que querés eliminar el producto ${producto.nombre}?`
+  );
 
   if (confirmar) {
     try {
@@ -15,19 +14,20 @@ export async function handleDelete(index, productos) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(datosActualizados),
         }
       );
 
-      const data = await response.json();
-
       if (response.ok) {
-        alert("Se elimino el producto correctamente");
+        alert("Se eliminó el producto correctamente");
+
+        if (onProductUpdate) {
+          await onProductUpdate();
+        }
       } else {
-        alert("Error al elimina el producto");
+        alert("Error al eliminar el producto");
       }
     } catch (error) {
-      console.error("Error al conectar con el servicor");
+      console.error("Error al conectar con el servidor", error);
       alert("Error al conectar con el servidor");
     }
   }

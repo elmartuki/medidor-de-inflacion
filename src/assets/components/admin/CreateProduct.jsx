@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { addProducts } from "../../services/addProduct";
 import "../../css/createProducts.css";
 
-export default function CreateProducto({ openForm, closeForm }) {
+export default function CreateProducto({
+  openForm,
+  closeForm,
+  onProductUpdate,
+}) {
   const [nombre, setNombre] = useState("");
   const [precio_hoy, setPrecioHoy] = useState("");
   const [precio_semana_1, setPrecioSemana1] = useState("");
@@ -22,8 +26,10 @@ export default function CreateProducto({ openForm, closeForm }) {
         <form
           className="productos-form-create"
           onClick={(event) => event.stopPropagation()}
-          onSubmit={() => {
-            addProducts(
+          onSubmit={(event) => {
+            event.preventDefault();
+
+            const success = addProducts(
               event,
               nombre,
               precio_hoy,
@@ -31,10 +37,20 @@ export default function CreateProducto({ openForm, closeForm }) {
               precio_semana_2,
               precio_semana_3,
               precio_1_mes,
-              precio_11_24
+              precio_11_24,
+              onProductUpdate
             );
 
-            closeForm();
+            if (success) {
+              closeForm();
+              setNombre("");
+              setPrecioHoy("");
+              setPrecioSemana1("");
+              setPrecioSemana2("");
+              setPrecioSemana3("");
+              setPrecio1Mes("");
+              setPrecio1124("");
+            }
           }}
         >
           <p>Crear un producto</p>

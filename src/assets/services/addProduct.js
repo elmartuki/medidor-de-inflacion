@@ -7,7 +7,7 @@ export async function addProducts(
   precio_semana_3,
   precio_1_mes,
   precio_11_24,
-  openForm
+  onProductUpdate
 ) {
   event.preventDefault();
 
@@ -34,6 +34,10 @@ export async function addProducts(
 
     if (response.ok) {
       alert("Se agrego un producto correctamente");
+
+      if (onProductUpdate) {
+        await onProductUpdate();
+      }
     } else {
       alert("Error al agregar un producto");
     }

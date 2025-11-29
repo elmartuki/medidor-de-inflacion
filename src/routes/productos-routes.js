@@ -10,8 +10,6 @@ const router = Router();
 
 router.get("/", obtenerProductosController);
 
-// router.get("/:id");
-
 router.post("/create", crearProductosController);
 
 router.put("/:id", editarProductosController);

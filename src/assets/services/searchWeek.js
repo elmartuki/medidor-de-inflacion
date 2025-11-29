@@ -1,7 +1,7 @@
-export function searchWeek(search, semanas) {
-  if (!search) return semanas;
+export function searchWeek(search, listaDeSemanas) {
+  if (!search) return listaDeSemanas;
 
-  return semanas.filter((semana) =>
-    semana.week.toLowerCase().includes(search.toLowerCase())
+  return listaDeSemanas.filter((semana) =>
+    semana.semana.toLowerCase().includes(search.toLowerCase())
   );
 } 
