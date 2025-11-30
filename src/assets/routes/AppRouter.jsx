@@ -13,7 +13,10 @@ export default function AppRouter() {
         path="/"
         element={
           <>
-            <InitPage />
+            <div style={{ display: "flex" }}>
+              <Side_bar />
+              <InitPage />
+            </div>
           </>
         }
       ></Route>
@@ -41,7 +44,6 @@ export default function AppRouter() {
         element={
           <>
             <div style={{ display: "flex" }}>
-              {" "}
               <Side_bar />
               <WeeksPage />
             </div>

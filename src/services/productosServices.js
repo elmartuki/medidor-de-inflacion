@@ -89,9 +89,10 @@ export async function movePriceHistoryServices() {
     let productosActualizados = 0;
 
     const actualizacionesPromesas = productos.map((producto) => {
-      producto.precio_4_semanas = producto.precio_3_semanas;
       producto.precio_3_semanas = producto.precio_2_semanas;
+
       producto.precio_2_semanas = producto.precio_1_semana;
+
       producto.precio_1_semana = producto.precio_hoy;
 
       return producto.save();
@@ -103,7 +104,7 @@ export async function movePriceHistoryServices() {
 
     return {
       json: {
-        message: "Historial de precios actualizado con éxito.",
+        message: "Historial de precios actualizado hasta 3 semanas con éxito.",
         modifiedCount: productosActualizados,
       },
       statusCode: 200,

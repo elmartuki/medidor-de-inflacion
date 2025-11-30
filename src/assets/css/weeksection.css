@@ -112,7 +112,7 @@
 
 @media (min-width: 1024px) {
   .weeks-section {
-    width: 90%;
+    width: 100%;
     max-height: 100vh;
     overflow-y: scroll;
   }

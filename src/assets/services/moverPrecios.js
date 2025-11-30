@@ -15,7 +15,7 @@ export async function updatePriceHistory(onProductUpdate) {
     if (response.ok) {
       alert(
         `Éxito: ${data.message} Productos modificados: ${
-          data.modifiedCount || 0 //
+          data.modifiedCount || 0 
         }`
       );
 
