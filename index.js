@@ -1,4 +1,3 @@
-// index.js
 import express from "express";
 import routes from "./src/routes/index-routes.js";
 import { connectDB } from "./src/db/config-db.js";

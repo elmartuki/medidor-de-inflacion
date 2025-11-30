@@ -9,11 +9,11 @@ export default function InitPage() {
   const { productos } = getProducts();
 
   return (
-    <>
+    <section className="init-page">
       <ImportantCards />
       <Stats productos={productos} />
       <Charts />
       <ArticlesCards productos={productos} />
-    </>
+    </section>
   );
 }

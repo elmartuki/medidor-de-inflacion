@@ -1,5 +1,5 @@
 import "../../css/charts.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -11,7 +11,6 @@ import {
   Area,
 } from "recharts";
 
-import { semanas } from "../../db/semanas.js";
 import {
   calcularInflacionAcumulada,
   filtrarSemanas,
@@ -19,10 +18,46 @@ import {
 
 export default function Charts() {
   const [filtro, setFiltro] = useState("all");
+  const [semanasData, setSemanasData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const semanasFiltradas = filtrarSemanas(semanas, filtro);
+  useEffect(() => {
+    const fetchSemanas = async () => {
+      try {
+        setLoading(true);
+
+        const response = await fetch("http://localhost:3000/api/semanas");
+
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        setSemanasData(data.data || data);
+      } catch (error) {
+        console.error("Error al obtener datos de las semanas:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSemanas();
+  }, []);
+
+  const semanasFiltradas = filtrarSemanas(semanasData, filtro);
 
   const dataFiltrada = calcularInflacionAcumulada(semanasFiltradas);
+
+  if (loading) {
+    return <div className="chart-section">Cargando datos de semanas...</div>;
+  }
+
+  if (semanasData.length === 0) {
+    return (
+      <div className="chart-section">No se encontraron datos de inflación.</div>
+    );
+  }
 
   return (
     <div className="chart-section">
