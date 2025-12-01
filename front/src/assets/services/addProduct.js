@@ -1,3 +1,5 @@
+import { BASEURL } from "../db/connectURL";
+
 export async function addProducts(
   event,
   nombre,
@@ -22,7 +24,7 @@ export async function addProducts(
   };
 
   try {
-    const response = await fetch("http://localhost:3000/api/productos/create", {
+    const response = await fetch(`${BASEURL}/api/productos/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,13 +35,10 @@ export async function addProducts(
     const data = await response.json();
 
     if (response.ok) {
-      
-
       if (onProductUpdate) {
         await onProductUpdate();
       }
     } else {
-     
     }
   } catch (error) {
     console.error("Error al conectar con el servicor");

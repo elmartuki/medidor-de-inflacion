@@ -1,21 +1,20 @@
+import { BASEURL } from "../db/connectURL";
+
 export async function updatePriceHistory(onProductUpdate) {
   try {
-    const response = await fetch(
-      "http://localhost:3000/api/productos/move-history",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${BASEURL}/api/productos/move-history`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const data = await response.json();
 
     if (response.ok) {
       alert(
         `Éxito: ${data.message} Productos modificados: ${
-          data.modifiedCount || 0 
+          data.modifiedCount || 0
         }`
       );
 
