@@ -5,9 +5,11 @@ export function getProducts() {
 
   const BASE_URL = import.meta.env.VITE_API_URL;
 
+  console.log("BASE_URL Cargada:", BASE_URL);
+
   async function obtenerProductos() {
     try {
-      const fetchResponse = await fetch(`${BASE_URL}/api/productos/`, {
+      const fetchResponse = await fetch(`${BASE_URL}/api/productos`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
