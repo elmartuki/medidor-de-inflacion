@@ -6,9 +6,19 @@ import cors from "cors";
 const app = express();
 const port = 3000;
 
+const allowedOrigins = [
+  "https://medidor-de-inflacion.vercel.app/", 
+];
+
+const corsOptions = {
+  origin: allowedOrigins,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, /
+};
+
 app.use(express.json());
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 connectDB();
 
