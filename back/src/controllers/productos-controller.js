@@ -3,11 +3,11 @@ import {
   editarProductosServices,
   eliminarProductoService,
   movePriceHistoryServices,
-  obtenerProductosServices,
+  obtenerProductosService,
 } from "../services/productosServices.js";
 
 export const obtenerProductosController = async (req, res) => {
-  const { json, statusCode } = await obtenerProductosServices();
+  const { json, statusCode } = await obtenerProductosService();
   res.status(statusCode).json(json);
 };
 
