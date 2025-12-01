@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { BASEURL } from "../db/connectURL";
 
 export function getSemanas() {
   const [semanas, setSemanas] = useState([]);
 
   async function obtenerSemanas() {
     try {
-      const fetchResponse = await fetch("http://localhost:3000/api/semanas", {
+      const fetchResponse = await fetch(`${BASEURL}/api/semanas`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -1,3 +1,5 @@
+import { BASEURL } from "../db/connectURL";
+
 export async function handleDelete(producto, onProductUpdate) {
   const productoID = producto._id;
 
@@ -8,7 +10,7 @@ export async function handleDelete(producto, onProductUpdate) {
   if (confirmar) {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/productos/${productoID}`,
+        `${BASEURL}/api/productos/${productoID}`,
         {
           method: "DELETE",
           headers: {

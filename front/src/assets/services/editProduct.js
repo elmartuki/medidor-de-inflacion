@@ -1,3 +1,5 @@
+import { BASEURL } from "../db/connectURL";
+
 export async function handleSubmit(event, index, productos) {
   event.preventDefault();
 
@@ -10,7 +12,7 @@ export async function handleSubmit(event, index, productos) {
 
   try {
     const response = await fetch(
-      `http://localhost:3000/api/productos/${productoID}`,
+      `${BASEURL}/api/productos/${productoID}`,
       {
         method: "PUT",
         headers: {

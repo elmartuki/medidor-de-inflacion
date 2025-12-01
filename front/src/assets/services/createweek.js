@@ -1,10 +1,12 @@
+import { BASEURL } from "../db/connectURL";
+
 export async function createWeek(event, week, variacion, onSemanasUpdate) {
   event.preventDefault();
 
   const nuevaSemana = { semana: week, variacion: variacion };
 
   try {
-    const response = await fetch("http://localhost:3000/api/semanas/create", {
+    const response = await fetch(`${BASEURL}/api/semanas/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

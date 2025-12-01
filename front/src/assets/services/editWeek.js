@@ -1,3 +1,5 @@
+import { BASEURL } from "../db/connectURL";
+
 export async function handleSubmit(
   { edit, index },
   listaDeSemanas,
@@ -13,7 +15,7 @@ export async function handleSubmit(
 
   try {
     const response = await fetch(
-      `http://localhost:3000/api/semanas/${semanaID}`,
+      `${BASEURL}/api/semanas/${semanaID}`,
       {
         method: "PUT",
         headers: {
