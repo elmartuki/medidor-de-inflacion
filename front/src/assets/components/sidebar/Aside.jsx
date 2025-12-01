@@ -25,7 +25,7 @@ const useMediaQuery = (query) => {
 export default function Aside() {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
-  const [openAside, setOpenAside] = useState(true);
+  const [openAside, setOpenAside] = useState(false);
 
   function handleCloseMenu() {
     setOpenAside(false);
@@ -37,7 +37,7 @@ export default function Aside() {
 
   useEffect(() => {
     if (isDesktop) {
-      setOpenAside(true);
+      setOpenAside(false);
     }
   }, [isDesktop]);
 
