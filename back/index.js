@@ -5,20 +5,9 @@ import cors from "cors";
 
 const app = express();
 
-const allowedOrigins = ["https://inflacion-argy.vercel.app"];
-
-const corsOptions = {
-  origin: allowedOrigins,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-};
-
 app.use(express.json());
-
 app.use(cors(corsOptions));
 
 connectDB();
 
 app.use("/api", routes);
-
-export default app;

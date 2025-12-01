@@ -1,17 +1,22 @@
 import { productosModel } from "../models/productosModel.js";
 
+import { productosModel } from "../models/productosModel.js";
+
 export const obtenerProductosService = async () => {
-  const productosDB = await productoModel.find();
+  const productosDB = await productosModel.find();
 
   if (productosDB.length > 0) {
     return {
-      json: { message: "Se encontraron productos", data: productosDB },
+      json: {
+        message: "Se encontraron productos de la base de datos",
+        data: productosDB,
+      },
       statusCode: 200,
     };
   } else {
     return {
       json: {
-        message: "No se encontraron productos, lista vacía",
+        message: "No se encontraron productos de la base de datos",
         data: productosDB,
       },
       statusCode: 200,
