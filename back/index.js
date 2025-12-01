@@ -6,7 +6,7 @@ import cors from "cors";
 const app = express();
 
 const allowedOrigins = [
-  "https://micanastafrecuente.vercel.app",
+  "https://micanastainflaciondb.vercel.app",
   "http://localhost:5173",
 ];
 
