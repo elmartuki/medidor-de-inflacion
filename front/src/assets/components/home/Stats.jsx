@@ -8,9 +8,7 @@ import {
   productoVariants,
 } from "../../services/productosStats";
 
-// Recibe 'productos' como prop
 export default function Stats({ productos }) {
-  // Las llamadas a funciones están protegidas en productosStats.js y variacion.js
   const { variacion, total_hoy } = variacionConverter(
     productos,
     "precio_hoy",
@@ -34,7 +32,6 @@ export default function Stats({ productos }) {
       >
         <div className="stats-card_title">
           <p>Costo total del carrito: ${total_hoy.toFixed(2)}</p>{" "}
-          {/* Usamos toFixed para formato */}
         </div>
         <div className="stats-card_data">
           <div>
@@ -76,7 +73,7 @@ export default function Stats({ productos }) {
         </div>
         <div className="stats-card_data">
           <img src={downArrow} alt="" />
-          <p>-2%</p> {/* Esto parece ser un valor fijo. */}
+          <p>-2%</p>
         </div>
       </article>
 

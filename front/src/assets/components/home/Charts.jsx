@@ -15,6 +15,7 @@ import {
   calcularInflacionAcumulada,
   filtrarSemanas,
 } from "../../utils/inflacion.js";
+import { BASEURL } from "../../db/connectURL.js";
 
 export default function Charts() {
   const [filtro, setFiltro] = useState("all");
@@ -26,7 +27,7 @@ export default function Charts() {
       try {
         setLoading(true);
 
-        const response = await fetch("http://localhost:3000/api/semanas");
+        const response = await fetch(`${BASEURL}/api/semanas`);
 
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);
