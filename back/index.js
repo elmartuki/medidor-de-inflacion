@@ -5,7 +5,7 @@ import cors from "cors";
 
 const app = express();
 
-const allowedOrigins = ["https://micanastafrecuente.vercel.app/"];
+const allowedOrigins = ["https://micanastafrecuente.vercel.app"];
 
 const corsOptions = {
   origin: allowedOrigins,
