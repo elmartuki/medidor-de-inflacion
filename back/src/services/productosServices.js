@@ -1,7 +1,5 @@
 import { productosModel } from "../models/productosModel.js";
 
-import { productosModel } from "../models/productosModel.js";
-
 export const obtenerProductosService = async () => {
   const productosDB = await productosModel.find();
 
