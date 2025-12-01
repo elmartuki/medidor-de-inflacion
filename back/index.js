@@ -5,7 +5,11 @@ import cors from "cors";
 
 const app = express();
 
-const allowedOrigins = ["https://micanastafrecuente.vercel.app"];
+const allowedOrigins = [
+  "micanastafrecuente.vercel.app",
+  "http://localhost:5173",
+];
+
 
 const corsOptions = {
   origin: allowedOrigins,
