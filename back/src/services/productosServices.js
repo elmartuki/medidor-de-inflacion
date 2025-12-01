@@ -1,31 +1,23 @@
 import { productosModel } from "../models/productosModel.js";
 
-export const obtenerProductosServices = async () => {
-  try {
-    const productosDB = await productosModel.find();
-    if (productosDB.length > 0) {
-      return {
-        json: {
-          message: "Se encontraron los productos",
-          data: productosDB,
-        },
-        statusCode: 200,
-      };
-    } else {
-      return {
-        json: {
-          message: "No se encontraron los productos",
-        },
-        statusCode: 404,
-      };
-    }
-  } catch (error) {
+export const obtenerProductosService = async () => {
+  const productosDB = await productosModel.find();
+
+  if (productosDB.length > 0) {
     return {
       json: {
-        message: "Error interno del servidor al obtener productos.",
-        error: error.message,
+        message: "Se encontraron productos de la base de datos",
+        data: productosDB,
       },
-      statusCode: 500,
+      statusCode: 200,
+    };
+  } else {
+    return {
+      json: {
+        message: "No se encontraron productos de la base de datos",
+        data: productosDB,
+      },
+      statusCode: 200,
     };
   }
 };
