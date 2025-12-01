@@ -1,9 +1,12 @@
 .menu-btn {
   position: fixed;
-  top: 10px;
-  left: 10px;
   background-color: transparent;
   border: none;
+  top: 0px;
+  width: 100%;
+  background: #202020;
+  display: flex !important;
+  padding: 5px 15px;
 
   img {
     width: 30px;
@@ -51,6 +54,17 @@ aside {
 }
 
 @media (min-width: 1024px) {
+  .menu-btn {
+    position: fixed;
+    background-color: transparent;
+    align-items: baseline;
+    justify-content: baseline;
+    left: 10px;
+    top: 10px;
+    display: flex !important;
+    padding: 5px;
+  }
+
   aside {
     width: 15%;
     height: 100vh;
