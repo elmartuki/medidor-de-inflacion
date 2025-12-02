@@ -26,6 +26,7 @@
   .productos-card_negative,
   .productos-card_positive,
   .productos-card_fuego,
+  .productos-card_cero,
   .productos-card_piano {
     display: flex;
     position: relative;
@@ -128,6 +129,7 @@
     flex-wrap: wrap;
     justify-content: center;
     .productos-card_negative,
+    .productos-card_cero,
     .productos-card_positive {
       width: 45%;
     }
@@ -142,6 +144,7 @@
     row-gap: 20px;
     .productos-card_negative,
     .productos-card_positive,
+    .productos-card_cero,
     .productos-card_fuego,
     .productos-card_piano {
       width: 30%;
@@ -157,6 +160,7 @@
     row-gap: 20px;
     .productos-card_negative,
     .productos-card_positive,
+    .productos-card_cero,
     .productos-card_fuego,
     .productos-card_piano {
       width: 24%;

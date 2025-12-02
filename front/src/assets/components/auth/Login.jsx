@@ -22,8 +22,8 @@ export default function Login() {
     const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
     if (
-      datosIngresados.usuario === ADMIN_USSER ||
-      datosIngresados.usuario.password === ADMIN_PASSWORD
+      datosIngresados.usuario == ADMIN_USSER &&
+      datosIngresados.password == ADMIN_PASSWORD
     ) {
       const accessKey = { puedeIngresar: true };
       navigate("/admin");
