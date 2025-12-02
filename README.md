@@ -1,6 +1,6 @@
 🧾 Medidor de Inflación Argentina
 
-Medidor de Inflación Argy es una aplicación web que permite visualizar de forma clara y actualizada las variaciones de precios de productos de la canasta básica en Argentina.
+Mi canasta frecuente de compras es una aplicación web que permite visualizar de forma clara y actualizada las variaciones de precios de productos de mi canasta frecuente de compras en Argentina.
 El proyecto muestra las variaciones semanales y mensuales de los precios, ayudando a seguir la evolución de la inflación día a día.
 
 ✨ Características principales
@@ -23,4 +23,4 @@ Precio anterior
 
 🚀 Deploy
 
-Disponible en: https://medidor-de-inflacion-argy.vercel.app/
+Disponible en: https://micanastafrecuente.vercel.app/
