@@ -7,6 +7,12 @@ import { calcularPromediosYVariacionesGlobales } from "../../services/calculateI
 
 import { getProducts } from "../../services/getProducts";
 
+import {
+  productoQueMasAumento,
+  productoQueMasBajo,
+  productoVariants,
+} from "../../services/productosStats";
+
 const formatVariations = (variations) => {
   if (!variations) return [];
 
@@ -38,6 +44,12 @@ export default function ImportantCards() {
   const { productos } = getProducts();
   const [variaciones, setVariaciones] = useState(null);
 
+  const { productoAumento, porcentajeAumento } =
+    productoQueMasAumento(productos);
+  const { productoBajada, porcentajeBajada } = productoQueMasBajo(productos);
+  const { productosQueSubieron, productosQueBajaron } =
+    productoVariants(productos);
+
   useEffect(() => {
     if (productos && productos.length > 0) {
       const { variaciones_globales } =
@@ -56,49 +68,86 @@ export default function ImportantCards() {
         {listToShow.map((item, index) => {
           const { nombre, variacion } = item;
 
+          const esCero = variacion === 0;
+          const esNegativa = variacion < 0;
           const displayVariacion = Math.abs(variacion).toFixed(2);
 
           return (
             <article
               key={index}
               className={
-                variacion === 0
+                esCero
                   ? "variaciones-card-cero"
-                  : variacion > 0
-                  ? "variaciones-card-positive"
-                  : variacion < 0
+                  : esNegativa
                   ? "variaciones-card-negative"
-                  : ""
+                  : "variaciones-card-positive"
               }
             >
               <div className="variaciones-card_name">
                 <p>{nombre}</p>
               </div>
+
               <div className="variaciones-card_data">
-                {variacion === 0 ? (
+                {esCero ? (
                   <>
                     <img className="igual" src={igual} alt="igual" />
                     <p>{displayVariacion}%</p>
                   </>
                 ) : (
                   <>
-                    {variacion < 0 ? (
-                      <>
-                        <img src={downArrow} alt="Bajó" />
-                        <p>{displayVariacion}%</p>
-                      </>
-                    ) : (
-                      <>
-                        <img src={upArrow} alt="Subió" />
-                        <p>{displayVariacion}%</p>
-                      </>
-                    )}
+                    <img
+                      src={esNegativa ? downArrow : upArrow}
+                      alt={esNegativa ? "Bajó" : "Subió"}
+                    />
+                    <p>{displayVariacion}%</p>
                   </>
                 )}
               </div>
             </article>
           );
         })}
+
+        <article className="variaciones-card-positive">
+          <div className="variaciones-card_name">
+            <p>Producto que más aumentó:</p>
+          </div>
+          <p>{productoAumento.nombre}</p>
+          <div className="variaciones-card_data">
+            <img src={upArrow} alt="Subió" />
+            <p>{porcentajeAumento.toFixed(2)}%</p>
+          </div>
+        </article>
+
+        <article className="variaciones-card-negative">
+          <div className="variaciones-card_name">
+            <p>Producto que más bajó:</p>
+          </div>
+          <p>{productoBajada.nombre}</p>
+          <div className="variaciones-card_data">
+            <img src={downArrow} alt="Bajó" />
+            <p>{porcentajeBajada.toFixed(2)}%</p>
+          </div>
+        </article>
+
+        <article
+          className={
+            productosQueBajaron === productosQueSubieron
+              ? "variaciones-card-cero"
+              : productosQueBajaron > productosQueSubieron
+              ? "variaciones-card-negative"
+              : "variaciones-card-positive"
+          }
+        >
+          <div className="variaciones-card_name">
+            <p>Productos que subieron/bajaron</p>
+          </div>
+          <div className="variaciones-card_data">
+            <img src={upArrow} alt="Subieron" />
+            <p>{productosQueSubieron}</p>
+            <img src={downArrow} alt="Bajaron" />
+            <p>{productosQueBajaron}</p>
+          </div>
+        </article>
       </section>
     </>
   );

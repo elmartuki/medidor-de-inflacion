@@ -1,3 +1,8 @@
+.flex-direction {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .variaciones-card-title {
   width: 85%;
   margin: auto;
@@ -11,7 +16,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin: 50px 0px;
+  margin-top: 50px;
 
   .variaciones-card-positive,
   .variaciones-card-cero,
@@ -68,14 +73,21 @@
 }
 
 @media (min-width: 1024px) {
+  .flex-direction {
+    display: flex;
+    flex-direction: column;
+  }
   .variaciones-card-section {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    margin: auto;
+    margin-top: 20px;
     .variaciones-card-positive,
     .variaciones-card-cero,
     .variaciones-card-negative {
-      width: 25%;
+      width: 28%;
+      height: 100px;
     }
   }
 }
