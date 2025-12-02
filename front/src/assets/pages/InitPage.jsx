@@ -2,7 +2,7 @@ import ImportantCards from "../components/home/ImportantCards";
 import ArticlesCards from "../components/home/ArticlesCards";
 import Charts from "../components/home/Charts";
 import { getProducts } from "../services/getProducts";
-import "../css/ImportantCard.css";
+import "../css/importantCard.css";
 import PrincipalCards from "../components/home/PrincipalCards";
 
 export default function InitPage() {
