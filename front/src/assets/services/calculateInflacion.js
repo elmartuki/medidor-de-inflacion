@@ -1,8 +1,8 @@
-function calcularVariacion(precioActual, precioAnterior) {
+export function calcularVariacion(precioActual, precioAnterior) {
   const actual = parseFloat(precioActual);
   const anterior = parseFloat(precioAnterior);
 
-  if (isNaN(actual) || isNaN(anterior) || anterior === 0) {
+  if (isNaN(actual) || isNaN(anterior) || anterior === 0 || anterior === null) {
     return 0;
   }
 
@@ -53,24 +53,76 @@ export function calcularPromediosYVariacionesGlobales(productos) {
       promedios.avg_hoy,
       promedios.avg_1_semana
     ),
-
     variacion_2_semanas: calcularVariacion(
       promedios.avg_1_semana,
       promedios.avg_2_semanas
     ),
-
     variacion_3_semanas: calcularVariacion(
       promedios.avg_2_semanas,
       promedios.avg_3_semanas
     ),
-
     variacion_mensual: calcularVariacion(
       promedios.avg_hoy,
       promedios.avg_4_semanas_mensual
     ),
-
     variacion_11_24: calcularVariacion(promedios.avg_hoy, promedios.avg_11_24),
   };
 
   return { promedios, variaciones_globales };
+}
+
+export function calcularTasaAcumulada(variaciones) {
+  if (variaciones.length === 0) {
+    return 0;
+  }
+
+  const factorAcumulado = variaciones.reduce((acc, variacionPorcentaje) => {
+    const tasaDecimal = variacionPorcentaje / 100;
+    return acc * (1 + tasaDecimal);
+  }, 1);
+
+  const tasaAcumulada = (factorAcumulado - 1) * 100;
+
+  return parseFloat(tasaAcumulada.toFixed(2));
+}
+
+export async function calcularVariacionIntermensualGlobal(
+  listaDeProductos,
+  calcularPromediosYVariacionesGlobales,
+  calcularTasaAcumulada
+) {
+  const API_URL_SEMANAS = "https://micanastafrecuentedb.vercel.app/api/semanas";
+  const semanasAUsar = 3;
+
+  if (!listaDeProductos || listaDeProductos.length === 0) {
+    return { variacion_intermensual_global: 0 };
+  }
+
+  try {
+    const response = await fetch(API_URL_SEMANAS);
+
+    if (!response.ok) {
+      console.error(
+        `Error al obtener variaciones del sistema: ${response.status}`
+      );
+      throw new Error("API de semanas no disponible.");
+    }
+
+    const apiData = await response.json();
+    const semanasData = apiData.data || [];
+
+    const variacionesSemanales = semanasData
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, semanasAUsar)
+      .map((s) => s.variacion);
+
+    const tasaAcumuladaSistema = calcularTasaAcumulada(variacionesSemanales);
+
+    return {
+      variacion_intermensual_global: tasaAcumuladaSistema,
+    };
+  } catch (error) {
+    console.error("Error al calcular variación global:", error);
+    return { variacion_intermensual_global: 0 };
+  }
 }

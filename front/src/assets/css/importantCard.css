@@ -11,9 +11,10 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin: 30px 0px;
+  margin: 50px 0px;
 
   .variaciones-card-positive,
+  .variaciones-card-cero,
   .variaciones-card-negative {
     display: flex;
     flex-direction: column;
@@ -25,7 +26,7 @@
 
     .variaciones-card_name {
       p {
-        color: rgba(255, 255, 255, 0.804);
+        color: #d0d0d0;
         font-size: 1rem;
       }
     }
@@ -35,7 +36,7 @@
       align-items: center;
 
       p {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
       }
 
       img {
@@ -59,6 +60,7 @@
     flex-wrap: wrap;
     justify-content: center;
     .variaciones-card-positive,
+    .variaciones-card-cero,
     .variaciones-card-negative {
       width: 30%;
     }
@@ -71,6 +73,7 @@
     flex-wrap: wrap;
     justify-content: center;
     .variaciones-card-positive,
+    .variaciones-card-cero,
     .variaciones-card-negative {
       width: 25%;
     }

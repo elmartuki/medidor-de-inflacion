@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../../css/importantCard.css";
-import upArrow from "../..//img/upArrow.svg";
-import downArrow from "../..//img/downArrow.svg";
+import upArrow from "../../img/upArrow.svg";
+import downArrow from "../../img/downArrow.svg";
+import igual from "../../img/igual.svg";
 import { calcularPromediosYVariacionesGlobales } from "../../services/calculateInflacion";
 
 import { getProducts } from "../../services/getProducts";
@@ -51,9 +52,6 @@ export default function ImportantCards() {
 
   return (
     <>
-      <p className="variaciones-card-title">
-        Inflación - Mi canasta frecuente de compras
-      </p>
       <section className="variaciones-card-section">
         {listToShow.map((item, index) => {
           const { nombre, variacion } = item;
@@ -64,24 +62,37 @@ export default function ImportantCards() {
             <article
               key={index}
               className={
-                variacion < 0
+                variacion === 0
+                  ? "variaciones-card-cero"
+                  : variacion > 0
+                  ? "variaciones-card-positive"
+                  : variacion < 0
                   ? "variaciones-card-negative"
-                  : "variaciones-card-positive"
+                  : ""
               }
             >
               <div className="variaciones-card_name">
                 <p>{nombre}</p>
               </div>
               <div className="variaciones-card_data">
-                {variacion < 0 ? (
+                {variacion === 0 ? (
                   <>
-                    <img src={downArrow} alt="Bajó" />
+                    <img className="igual" src={igual} alt="igual" />
                     <p>{displayVariacion}%</p>
                   </>
                 ) : (
                   <>
-                    <img src={upArrow} alt="Subió" />
-                    <p>{displayVariacion}%</p>
+                    {variacion < 0 ? (
+                      <>
+                        <img src={downArrow} alt="Bajó" />
+                        <p>{displayVariacion}%</p>
+                      </>
+                    ) : (
+                      <>
+                        <img src={upArrow} alt="Subió" />
+                        <p>{displayVariacion}%</p>
+                      </>
+                    )}
                   </>
                 )}
               </div>
