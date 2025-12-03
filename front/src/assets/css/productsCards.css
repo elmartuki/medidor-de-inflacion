@@ -42,7 +42,7 @@
       right: 0px;
       p {
         font-size: 30px;
-        animation: emoji 4s ease-in forwards;
+        animation: emoji 4s ease-in infinite;
       }
     }
 
@@ -90,7 +90,7 @@
   }
 
   50% {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 
   100% {
@@ -147,7 +147,7 @@
     .productos-card_cero,
     .productos-card_fuego,
     .productos-card_piano {
-      width: 30%;
+      width: 32%;
     }
   }
 }

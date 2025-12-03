@@ -8,6 +8,7 @@ const app = express();
 const allowedOrigins = [
   "https://micanastafrecuente.vercel.app",
   "http://localhost:5173",
+  "http://192.168.1.40:5173",
 ];
 
 

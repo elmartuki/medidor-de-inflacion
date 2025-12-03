@@ -1,9 +1,12 @@
 .chart-section {
-  width: 100%;
+  width: 95%;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 30px 0px;
+  background: #202020;
 
   .chart {
     width: 95%;

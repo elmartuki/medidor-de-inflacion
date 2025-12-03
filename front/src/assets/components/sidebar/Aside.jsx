@@ -25,62 +25,64 @@ const useMediaQuery = (query) => {
 export default function Aside() {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
-  const [openAside, setOpenAside] = useState(false);
-
-  function handleCloseMenu() {
-    setOpenAside(false);
-  }
-
-  function handleOpenMenu() {
-    setOpenAside(true);
-  }
+  const [isAsideExpanded, setIsAsideExpanded] = useState(false);
 
   useEffect(() => {
     if (isDesktop) {
-      setOpenAside(false);
+      setIsAsideExpanded(true);
+    } else {
+      setIsAsideExpanded(false);
     }
   }, [isDesktop]);
 
-  function handleCloseAside() {
-    if (!isDesktop) {
-      setOpenAside(false);
-    }
-  }
+  const handleToggleAside = () => {
+    setIsAsideExpanded(!isAsideExpanded);
+  };
 
-  function handleOpenAside() {
-    setOpenAside(true);
-  }
+  const handleCloseAsideMobile = () => {
+    if (!isDesktop) {
+      setIsAsideExpanded(false);
+    }
+  };
+
+  const isMinimized = isDesktop && !isAsideExpanded;
 
   return (
     <>
       <button
-        style={{ display: openAside && !isDesktop ? "none" : "block" }}
+        style={{ display: !isAsideExpanded && !isDesktop ? "block" : "none" }}
         className="menu-btn"
-        onClick={handleOpenMenu}
+        onClick={handleToggleAside}
       >
         <img src={menu} alt="" />
       </button>
 
-      <aside style={{ display: openAside ? "block" : "none" }}>
+      <aside
+        className={`${isMinimized ? "aside-minimized" : ""} ${
+          !isDesktop && !isAsideExpanded ? "aside-hidden" : ""
+        }`}
+        style={{ display: isDesktop || isAsideExpanded ? "block" : "none" }}
+      >
         <div className="aside-title">
-          <button className="menu-btn" onClick={handleCloseMenu}>
+          <button className="menu-btn" onClick={handleToggleAside}>
             <img src={menu} alt="" />
           </button>
 
-          <p>Admin Panel</p>
+          {!isMinimized && <p>Admin Panel</p>}
         </div>
         <div className="aside-elements">
-          <NavLink onClick={handleCloseAside} to="/">
+          <NavLink onClick={handleCloseAsideMobile} to="/">
             <img src={dash} alt="" />
-            Dashboard
+
+            {!isMinimized && "Dashboard"}
           </NavLink>
-          <NavLink onClick={handleCloseAside} to="/admin">
+          <NavLink onClick={handleCloseAsideMobile} to="/admin">
             <img src={product} alt="" />
-            Productos
+            {!isMinimized && "Productos"}
           </NavLink>
-          <NavLink onClick={handleCloseAside} to="/weeks">
+          <NavLink onClick={handleCloseAsideMobile} to="/weeks">
             <img src={week} alt="" />
-            Semanas
+            {!isMinimized && "Semanas"}
           </NavLink>
         </div>
       </aside>
