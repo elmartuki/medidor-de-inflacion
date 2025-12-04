@@ -127,7 +127,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
         </section>
 
         <section className="productos-admin-section">
-          <p className="productos-section_title">Listado de productos</p>
+          <p className="productos-admin-title">Listado de productos</p>
 
           <button className="price-move-btn" onClick={handlePriceMove}>
             Mover Precios
