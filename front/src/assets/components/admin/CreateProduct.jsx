@@ -15,6 +15,9 @@ export default function CreateProducto({
   const [precio_1_mes, setPrecio1Mes] = useState("");
   const [precio_11_24, setPrecio1124] = useState("");
 
+  const [openCreateConfirm, setOpenCreateConfirm] = useState(false);
+  const [message, setMessage] = useState("");
+
   if (openForm) {
     return (
       <section
@@ -42,6 +45,13 @@ export default function CreateProducto({
             );
 
             if (success) {
+              setOpenCreateConfirm(true);
+              setMessage(nombre);
+
+              setTimeout(() => {
+                setOpenCreateConfirm(false);
+              }, 3000);
+
               closeForm();
               setNombre("");
               setPrecioHoy("");

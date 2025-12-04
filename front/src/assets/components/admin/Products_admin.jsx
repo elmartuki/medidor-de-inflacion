@@ -1,24 +1,45 @@
+import React, { useEffect, useState } from "react";
+// Importaciones
 import "../../css/productsForm.css";
 import "../../css/search.css";
 import "../../css/adminpanel.css";
 import borrar from "../../img/delete.svg";
 import edit from "../../img/edit.svg";
 import add from "../../img/add.svg";
-import { useEffect, useState } from "react";
 import { handleSearch } from "../../services/search";
 import { handleChange, handleSubmit } from "../../services/editProduct";
 import { handleDelete } from "../../services/deleteProduct";
 import CreateProducto from "./CreateProduct";
 import { updatePriceHistory } from "../../services/moverPrecios";
+import Confirm from "../modal/Confirm";
+import ModalConfirmar from "../modal/ModalConfirmar";
 
 export default function Products_admin({ listaDeProductos, onProductUpdate }) {
   const [productos, setProductos] = useState(listaDeProductos);
   const [search, setSearch] = useState("");
   const [openCreate, setOpenCreate] = useState(false);
 
+  // Estados reutilizados para el modal de éxito (edición, eliminación, y ahora creación)
+  const [openModal, setOpenModal] = useState(false);
+  const [productoToDelete, setProductoToDelete] = useState(null);
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
     setProductos(listaDeProductos);
   }, [listaDeProductos]);
+
+  // FUNCIÓN PARA MANEJAR EL ÉXITO DE LA CREACIÓN (YA ESTABA DEFINIDA CORRECTAMENTE)
+  const handleCreationSuccess = (productName) => {
+    setOpenModal(true);
+    setMessage(`¡El producto **${productName}** fue creado correctamente! 🎉`);
+
+    // Temporizador para cerrar el modal
+    setTimeout(() => {
+      setOpenModal(false);
+      setMessage(""); // Limpiar el mensaje
+    }, 3000);
+  };
 
   const handlePriceMove = async () => {
     const cofirmar = confirm("Desea mover los precios?");
@@ -28,10 +49,65 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
     }
   };
 
+  const handleEditSubmit = async (event, index) => {
+    const success = await handleSubmit(
+      event,
+      index,
+      productos,
+      setProductos,
+      onProductUpdate
+    );
+
+    if (success) {
+      setOpenModal(true);
+      setMessage("Este articulo se editó correctamente.");
+
+      setTimeout(() => {
+        setOpenModal(false);
+      }, 3000);
+    } else {
+      alert("Error al actualizar el producto.");
+    }
+  };
+
+  const handleOpenDeleteModal = (producto) => {
+    setProductoToDelete(producto);
+    setOpenConfirmDelete(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    setOpenConfirmDelete(false);
+    if (productoToDelete) {
+      await handleDelete(productoToDelete, onProductUpdate);
+
+      setOpenModal(true);
+      setMessage(`El producto ${productoToDelete.nombre} fue eliminado.`);
+
+      setTimeout(() => {
+        setOpenModal(false);
+        setProductoToDelete(null);
+      }, 3000);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setOpenConfirmDelete(false);
+    setProductoToDelete(null);
+  };
+
   const listToShow = handleSearch(search, productos || []);
 
   return (
     <>
+      {/* Modal de Éxito (reutilizado para edición, eliminación y CREACIÓN) */}
+      <Confirm openModal={openModal} message={message} />
+      {/* Modal de Confirmación de Eliminación */}
+      <ModalConfirmar
+        openConfirmDelente={openConfirmDelete}
+        producto={productoToDelete}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
       <section className="admin-panel">
         <section className="product-create-section">
           <button
@@ -45,11 +121,13 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
             openForm={openCreate}
             onProductUpdate={onProductUpdate}
             closeForm={() => setOpenCreate(false)}
+            // PASAMOS la función que dispara la modal de éxito
+            onCreationSuccess={handleCreationSuccess}
           />
         </section>
 
         <section className="productos-admin-section">
-          <p className="productos-section_title">Listado de productos</p>
+          <p className="productos-admin-title">Listado de productos</p>
 
           <button className="price-move-btn" onClick={handlePriceMove}>
             Mover Precios
@@ -81,9 +159,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                   <form
                     className="productos-form"
                     key={index}
-                    onSubmit={(event) =>
-                      handleSubmit(event, index, productos, setProductos)
-                    }
+                    onSubmit={(event) => handleEditSubmit(event, index)}
                   >
                     <div className="productos-form_name">
                       <input
@@ -105,9 +181,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                           <img src={edit} alt="" />
                         </button>
                         <button
-                          onClick={() => {
-                            handleDelete(producto, onProductUpdate);
-                          }}
+                          onClick={() => handleOpenDeleteModal(producto)}
                           type="button"
                           className="btn-borrar"
                         >

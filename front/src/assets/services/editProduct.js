@@ -8,26 +8,21 @@ export async function handleSubmit(event, index, productos) {
 
   const datosActualizados = productoAEditar;
 
- 
-
   try {
-    const response = await fetch(
-      `${BASEURL}/api/productos/${productoID}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datosActualizados),
-      }
-    );
+    const response = await fetch(`${BASEURL}/api/productos/${productoID}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datosActualizados),
+    });
 
     const data = await response.json();
 
     if (response.ok) {
-     
+      return true;
     } else {
-    
+      return false;
     }
   } catch (error) {
     console.error("Error al conectar con el servicor");

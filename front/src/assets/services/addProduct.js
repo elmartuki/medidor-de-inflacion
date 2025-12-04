@@ -32,16 +32,20 @@ export async function addProducts(
       body: JSON.stringify(nuevoProducto),
     });
 
-    const data = await response.json();
+    const data = await response.json(); // Leemos la data por si se necesita loguear
 
     if (response.ok) {
       if (onProductUpdate) {
         await onProductUpdate();
       }
+      return true; // <--- IMPORTANTE: Retorna éxito para activar el modal
     } else {
+      console.error("Error en servidor:", data);
+      return false; // <--- Retorna fallo
     }
   } catch (error) {
-    console.error("Error al conectar con el servicor");
+    console.error("Error al conectar con el servidor", error);
     alert("Error al conectar con el servidor");
+    return false; // <--- Retorna fallo
   }
 }

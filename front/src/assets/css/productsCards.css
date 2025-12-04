@@ -137,6 +137,10 @@
 }
 
 @media (min-width: 1024px) {
+  .productos-section_title {
+    margin: 20px auto;
+  }
+
   .productos-section {
     flex-direction: row;
     flex-wrap: wrap;
