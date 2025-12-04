@@ -1,0 +1,125 @@
+.section-modal {
+  animation: modalAnimation 3s ease 1 forwards;
+}
+
+.section-modal-confirm {
+  animation: modalConfirmAnimation 3s ease 1 forwards;
+}
+
+.section-modal,
+.section-modal-confirm,
+.modal-neged {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  top: 10px;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    background-color: #202020;
+    pointer-events: all;
+
+    div {
+      display: flex;
+      justify-content: center;
+
+      gap: 10px;
+      button {
+        background-color: transparent;
+        padding: 5px 10px;
+        border-radius: 6px;
+        transition: 0.5s;
+      }
+
+      button:nth-child(1) {
+        border: 2px solid red;
+
+        &:hover {
+          transform: scale(1.1);
+          background-color: red;
+        }
+      }
+
+      button:nth-child(2) {
+        border: 2px solid rgba(255, 255, 255, 0.817);
+        &:hover {
+          transform: scale(1.1);
+          background-color: rgba(255, 255, 255, 0.817);
+          color: #202020;
+        }
+      }
+    }
+  }
+
+  .modal-sucsses,
+  .modal,
+  .modal-neged {
+    position: fixed;
+    top: 10px;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-align: center;
+    background-color: #202020;
+  }
+
+  .modal-neged {
+    border: 2px solid red;
+  }
+
+  .modal-sucsses {
+    border: 2px solid green;
+  }
+}
+
+@keyframes modalAnimation {
+  0% {
+    opacity: 0%;
+    transform: translateY(-130px);
+  }
+
+  75% {
+    transform: translateY(0%);
+    opacity: 100%;
+  }
+
+  75% {
+    transform: translateY(0%);
+    opacity: 100%;
+  }
+
+  100% {
+    transform: translateY(10%);
+    opacity: 0%;
+  }
+}
+
+@keyframes modalConfirmAnimation {
+  0% {
+    opacity: 0%;
+    transform: translateY(-130px);
+  }
+
+  75% {
+    transform: translateY(0%);
+    opacity: 100%;
+  }
+
+  75% {
+    transform: translateY(0%);
+    opacity: 100%;
+  }
+
+  100% {
+    transform: translateY(10%);
+  }
+}

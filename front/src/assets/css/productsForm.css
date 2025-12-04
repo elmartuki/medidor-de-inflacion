@@ -19,6 +19,15 @@
   }
 }
 
+.btn-borrar,
+.btn-editar {
+  transition: 0.5s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
 .productos-admin-section {
   display: flex;
   width: 95%;

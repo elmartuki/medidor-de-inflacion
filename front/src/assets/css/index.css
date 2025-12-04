@@ -19,6 +19,12 @@ body {
   background-color: #161616;
 }
 
+input {
+  &:focus {
+    outline: none;
+  }
+}
+
 button {
   cursor: pointer;
 }
