@@ -1,6 +1,6 @@
 import { BASEURL } from "../db/connectURL";
 
-export async function handleSubmit(event, index, productos) {
+export async function handleSubmit(event, index, productos, onProductUpdate) {
   event.preventDefault();
 
   const productoAEditar = productos[index];
@@ -20,18 +20,24 @@ export async function handleSubmit(event, index, productos) {
     const data = await response.json();
 
     if (response.ok) {
+      if (onProductUpdate) {
+        await onProductUpdate();
+      }
       return true;
     } else {
+      console.error("Error del servidor:", data);
       return false;
     }
   } catch (error) {
-    console.error("Error al conectar con el servicor");
+    console.error("Error al conectar con el servicor", error);
     alert("Error al conectar con el servidor");
+    return false;
   }
 }
 
 export const handleChange = (index, campo, valor, productos, setProductos) => {
   const nuevosProductos = [...productos];
-  nuevosProductos[index][campo] = valor;
+  const valorFinal = campo.startsWith("precio_") ? Number(valor) : valor;
+  nuevosProductos[index][campo] = valorFinal;
   setProductos(nuevosProductos);
 };
