@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// Importaciones
 import "../../css/productsForm.css";
 import "../../css/search.css";
 import "../../css/adminpanel.css";
@@ -19,7 +18,6 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
   const [search, setSearch] = useState("");
   const [openCreate, setOpenCreate] = useState(false);
 
-  // Estados reutilizados para el modal de éxito (edición, eliminación, y ahora creación)
   const [openModal, setOpenModal] = useState(false);
   const [productoToDelete, setProductoToDelete] = useState(null);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
@@ -29,15 +27,13 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
     setProductos(listaDeProductos);
   }, [listaDeProductos]);
 
-  // FUNCIÓN PARA MANEJAR EL ÉXITO DE LA CREACIÓN (YA ESTABA DEFINIDA CORRECTAMENTE)
   const handleCreationSuccess = (productName) => {
     setOpenModal(true);
     setMessage(`¡El producto **${productName}** fue creado correctamente! 🎉`);
 
-    // Temporizador para cerrar el modal
     setTimeout(() => {
       setOpenModal(false);
-      setMessage(""); // Limpiar el mensaje
+      setMessage("");
     }, 3000);
   };
 
@@ -54,7 +50,6 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
       event,
       index,
       productos,
-      setProductos,
       onProductUpdate
     );
 
@@ -99,9 +94,8 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
 
   return (
     <>
-      {/* Modal de Éxito (reutilizado para edición, eliminación y CREACIÓN) */}
       <Confirm openModal={openModal} message={message} />
-      {/* Modal de Confirmación de Eliminación */}
+
       <ModalConfirmar
         openConfirmDelente={openConfirmDelete}
         producto={productoToDelete}
@@ -121,7 +115,6 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
             openForm={openCreate}
             onProductUpdate={onProductUpdate}
             closeForm={() => setOpenCreate(false)}
-            // PASAMOS la función que dispara la modal de éxito
             onCreationSuccess={handleCreationSuccess}
           />
         </section>
@@ -144,7 +137,13 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
 
           {listToShow.length > 0 ? (
             <>
-              {listToShow.map((producto, index) => {
+              {listToShow.map((producto) => {
+                const indexEnProductos = productos.findIndex(
+                  (p) => p._id === producto._id
+                );
+
+                if (indexEnProductos === -1) return null;
+
                 const {
                   nombre,
                   precio_hoy,
@@ -158,8 +157,10 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                 return (
                   <form
                     className="productos-form"
-                    key={index}
-                    onSubmit={(event) => handleEditSubmit(event, index)}
+                    key={producto._id}
+                    onSubmit={(event) =>
+                      handleEditSubmit(event, indexEnProductos)
+                    }
                   >
                     <div className="productos-form_name">
                       <input
@@ -167,7 +168,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                         value={nombre}
                         onChange={(event) =>
                           handleChange(
-                            index,
+                            indexEnProductos,
                             "nombre",
                             event.target.value,
                             productos,
@@ -201,7 +202,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                             value={precio_hoy}
                             onChange={(event) =>
                               handleChange(
-                                index,
+                                indexEnProductos,
                                 "precio_hoy",
                                 event.target.value,
                                 productos,
@@ -222,7 +223,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                             value={precio_1_semana}
                             onChange={(event) =>
                               handleChange(
-                                index,
+                                indexEnProductos,
                                 "precio_1_semana",
                                 event.target.value,
                                 productos,
@@ -245,7 +246,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                             value={precio_2_semanas}
                             onChange={(event) =>
                               handleChange(
-                                index,
+                                indexEnProductos,
                                 "precio_2_semanas",
                                 event.target.value,
                                 productos,
@@ -266,7 +267,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                             value={precio_3_semanas}
                             onChange={(event) =>
                               handleChange(
-                                index,
+                                indexEnProductos,
                                 "precio_3_semanas",
                                 event.target.value,
                                 productos,
@@ -288,7 +289,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                             value={precio_4_semanas}
                             onChange={(event) =>
                               handleChange(
-                                index,
+                                indexEnProductos,
                                 "precio_4_semanas",
                                 event.target.value,
                                 productos,
@@ -309,7 +310,7 @@ export default function Products_admin({ listaDeProductos, onProductUpdate }) {
                             value={precio_11_24}
                             onChange={(event) =>
                               handleChange(
-                                index,
+                                indexEnProductos,
                                 "precio_11_24",
                                 event.target.value,
                                 productos,
