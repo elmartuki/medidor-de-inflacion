@@ -6,17 +6,18 @@ import {
   movePriceHistoryController,
   obtenerProductosController,
 } from "../controllers/productos-controller.js";
+import { validarToken } from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 
 router.get("/", obtenerProductosController);
 
-router.post("/create", crearProductosController);
+router.post("/create", validarToken, crearProductosController);
 
-router.put("/move-history", movePriceHistoryController);
+router.put("/move-history", validarToken, movePriceHistoryController);
 
-router.put("/:id", editarProductosController);
+router.put("/:id", validarToken, editarProductosController);
 
-router.delete("/:id", eliminarProductoController);
+router.delete("/:id", validarToken, eliminarProductoController);
 
 export default router;

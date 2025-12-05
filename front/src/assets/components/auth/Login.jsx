@@ -21,18 +21,21 @@ export default function Login() {
 
     const datosIngresados = { usuario: usuario, password: password };
 
-    const ADMIN_USSER = import.meta.env.VITE_ADMIN_USSER;
+    const response = await fetch("http://localhost:3000/api/usuarios/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datosIngresados),
+    });
 
-    const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+    const data = await response.json();
 
-    if (
-      datosIngresados.usuario == ADMIN_USSER &&
-      datosIngresados.password == ADMIN_PASSWORD
-    ) {
-      const accessKey = { puedeIngresar: true };
+    if (response.ok) {
+      guardarEnSessionStorage("token", data.token);
+      guardarEnSessionStorage("datosUsuario", data.datosUsuario);
       setMessage("Ingresaste correctamente.");
       setOpenModal(true);
-      guardarEnSessionStorage("accessKey", accessKey);
       setTimeout(() => {
         setOpenModal(false);
         navigate("/admin");

@@ -1,5 +1,6 @@
 import express from "express";
 import routes from "./src/routes/index-routes.js";
+import helmet from "helmet";
 import { connectDB } from "./src/db/config-db.js";
 import cors from "cors";
 
@@ -11,7 +12,6 @@ const allowedOrigins = [
   "http://192.168.1.40:5173",
 ];
 
-
 const corsOptions = {
   origin: allowedOrigins,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -19,6 +19,8 @@ const corsOptions = {
 };
 
 app.use(express.json());
+
+app.use(helmet());
 
 app.use(cors(corsOptions));
 

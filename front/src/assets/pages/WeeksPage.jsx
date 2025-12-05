@@ -9,7 +9,6 @@ export default function WeeksPage() {
   const [search, setSearch] = useState("");
   const { semanas, obtenerSemanas, setSemanas } = getSemanas();
 
-  console.log(semanas);
 
   return (
     <section className="weeks-section">

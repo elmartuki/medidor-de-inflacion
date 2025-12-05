@@ -1,4 +1,5 @@
 import argon, { verify } from "argon2";
+import jwt from "jsonwebtoken";
 import { UsuarioModel } from "../models/usuarioModel.js";
 
 export const obtenerUsuariosServicio = async () => {
@@ -68,10 +69,22 @@ export const loginUsuariosServicio = async (datosIngresados) => {
         statusCode: 401,
       };
     } else {
+      const payload = {
+        usuario: existeUsuario.usuario,
+        rol: existeUsuario.rol,
+      };
+
+      const token = jwt.sign(payload, process.env.SECRET_KEY, {
+        expiresIn: "1h",
+      });
+
       return {
         json: {
           message: "Bienvenido de nuevo Jefe.",
+          datosUsuario: payload,
+          token: token,
         },
+
         statusCode: 200,
       };
     }

@@ -1,4 +1,5 @@
 import { BASEURL } from "../db/connectURL";
+import { obtenerDelSessionStorage } from "../utils/localStorage";
 
 export async function addProducts(
   event,
@@ -23,29 +24,39 @@ export async function addProducts(
     precio_11_24: precio_11_24,
   };
 
+  const token = obtenerDelSessionStorage("token");
+
+  if (!token) {
+    console.error(
+      "Token no encontrado. Debes iniciar sesion como administrador para poder hacer peticiones"
+    );
+    return false;
+  }
+
   try {
     const response = await fetch(`${BASEURL}/api/productos/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevoProducto),
     });
 
-    const data = await response.json(); // Leemos la data por si se necesita loguear
+    const data = await response.json(); 
 
     if (response.ok) {
       if (onProductUpdate) {
         await onProductUpdate();
       }
-      return true; // <--- IMPORTANTE: Retorna éxito para activar el modal
+      return true; 
     } else {
       console.error("Error en servidor:", data);
-      return false; // <--- Retorna fallo
+      return false;
     }
   } catch (error) {
     console.error("Error al conectar con el servidor", error);
     alert("Error al conectar con el servidor");
-    return false; // <--- Retorna fallo
+    return false;
   }
 }

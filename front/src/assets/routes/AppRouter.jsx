@@ -5,7 +5,6 @@ import AdminPage from "../pages/AdminPage";
 import WeeksPage from "../pages/WeeksPage";
 import UsserRoutes from "./UsserRoutes";
 import AdminRoutes from "./AdminRoutes";
-import Aside from "../components/sidebar/Aside";
 
 export default function AppRouter() {
   return (
