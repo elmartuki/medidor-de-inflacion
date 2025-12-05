@@ -44,22 +44,53 @@ export const crearProductosServices = async (nuevoProducto) => {
 };
 
 export const editarProductosServices = async (id, editarProducto) => {
-  const productoActualizado = await productosModel.findByIdAndUpdate(
-    id,
-    editarProducto,
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+  try {
+    const productoActualizado = await productosModel.findByIdAndUpdate(
+      id,
+      editarProducto,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
-  return {
-    json: {
-      mensaje: "Producto editado con éxito",
-      datos: productoActualizado,
-    },
-    statusCode: 202,
-  };
+    if (!productoActualizado) {
+      return {
+        json: {
+          mensaje:
+            "Producto no encontrado para editar. Verifique que el ID exista en la base de datos.",
+          datos: null,
+        },
+        statusCode: 404,
+      };
+    }
+
+    return {
+      json: {
+        mensaje: "Producto editado con éxito",
+        datos: productoActualizado,
+      },
+      statusCode: 200,
+    };
+  } catch (error) {
+    if (error.name === "CastError") {
+      return {
+        json: {
+          mensaje: "Error: El formato del ID proporcionado es inválido.",
+          error: error.message,
+        },
+        statusCode: 400,
+      };
+    }
+
+    return {
+      json: {
+        mensaje: "Error de validación al editar el producto.",
+        error: error.message,
+      },
+      statusCode: 400,
+    };
+  }
 };
 
 export const eliminarProductoService = async (id) => {

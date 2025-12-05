@@ -1,4 +1,5 @@
 import { BASEURL } from "../db/connectURL";
+import { obtenerDelSessionStorage } from "../utils/localStorage";
 
 export async function handleSubmit(event, index, productos, onProductUpdate) {
   event.preventDefault();
@@ -6,13 +7,26 @@ export async function handleSubmit(event, index, productos, onProductUpdate) {
   const productoAEditar = productos[index];
   const productoID = productoAEditar._id;
 
-  const datosActualizados = productoAEditar;
+  const datosActualizados = { ...productoAEditar };
+  delete datosActualizados._id;
+  delete datosActualizados.updatedAt;
+
+  const token = obtenerDelSessionStorage("token");
+
+  if (!token) {
+    console.error(
+      "Token no encontrado. Debes iniciar sesion como administrador para poder hacer peticiones"
+    );
+    return false;
+  }
+
 
   try {
     const response = await fetch(`${BASEURL}/api/productos/${productoID}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(datosActualizados),
     });
@@ -37,7 +51,19 @@ export async function handleSubmit(event, index, productos, onProductUpdate) {
 
 export const handleChange = (index, campo, valor, productos, setProductos) => {
   const nuevosProductos = [...productos];
-  const valorFinal = campo.startsWith("precio_") ? Number(valor) : valor;
+
+  let valorFinal = valor;
+
+  if (campo.startsWith("precio_")) {
+    const numeroConvertido = Number(valor);
+
+    if (isNaN(numeroConvertido)) {
+      valorFinal = valor;
+    } else {
+      valorFinal = numeroConvertido;
+    }
+  }
+
   nuevosProductos[index][campo] = valorFinal;
   setProductos(nuevosProductos);
 };

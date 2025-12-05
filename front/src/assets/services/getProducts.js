@@ -13,7 +13,6 @@ export function getProducts() {
         },
       });
 
-      console.log(fetchResponse);
       const apiResponse = await fetchResponse.json();
       setProductos(apiResponse.data || []);
     } catch (error) {

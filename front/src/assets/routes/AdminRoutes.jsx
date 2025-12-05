@@ -2,9 +2,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import { obtenerDelSessionStorage } from "../utils/localStorage";
 
 export default function AdminRoutes() {
-  const isAdmin = obtenerDelSessionStorage("accessKey");
+  const datosUsuario = obtenerDelSessionStorage("datosUsuario");
 
-  if (isAdmin?.puedeIngresar === true) {
+  const esAdmin = datosUsuario && datosUsuario.rol === "admin";
+
+  if (esAdmin) {
     return (
       <>
         <Outlet />

@@ -4,10 +4,11 @@ import {
   obtenerUsuariosController,
   registroUsuarioController,
 } from "../controllers/usuarios-controllers.js";
+import { validarToken } from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 
-router.get("/", obtenerUsuariosController);
+router.get("/", validarToken, obtenerUsuariosController);
 
 // router.use("/:id");
 
