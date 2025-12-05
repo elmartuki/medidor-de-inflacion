@@ -21,6 +21,7 @@
   display: flex;
   gap: 10px;
   margin: -10px auto 15px auto;
+  overflow-x: scroll;
 
   button {
     background-color: transparent;
@@ -171,6 +172,10 @@
 }
 
 @media (min-width: 1024px) {
+  .productos-section-btn {
+    overflow-x: hidden;
+  }
+
   .productos-section_title {
     margin: 20px auto;
   }

@@ -34,6 +34,16 @@ export default function ArticlesCards({ productos }) {
         <button onClick={() => setOpenfilter2(!openFilter2)}>
           Filtrar por
         </button>
+        <button
+          onClick={() => {
+            setValor1("precio_1_semana"),
+              setFiltrarPor(""),
+              setOpenfilter1(false),
+              setOpenfilter2(false);
+          }}
+        >
+          Restablecer
+        </button>
       </div>
 
       {openFilter1 ? (
@@ -102,14 +112,6 @@ export default function ArticlesCards({ productos }) {
             }}
           >
             Mayor a menor
-          </button>
-          <button
-            onClick={() => {
-              setFiltrarPor("");
-              setOpenfilter2(false);
-            }}
-          >
-            Restablecer
           </button>
         </div>
       ) : (
