@@ -8,6 +8,7 @@ import passwordIcon from "../../img/password.svg";
 import backImg from "../../img/back.svg";
 import ErrorModal from "../modal/ErrorModal";
 import Confirm from "../modal/Confirm";
+import { BASEURL } from "../../db/connectURL";
 
 export default function Login() {
   const [usuario, setUsuario] = useState("");
@@ -21,7 +22,7 @@ export default function Login() {
 
     const datosIngresados = { usuario: usuario, password: password };
 
-    const response = await fetch("http://localhost:3000/api/usuarios/login", {
+    const response = await fetch(`${BASEURL}/api/usuarios/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
