@@ -68,7 +68,7 @@ export default function Aside() {
             <img src={menu} alt="" />
           </button>
 
-          {!isMinimized && <p>Admin Panel</p>}
+          {!isMinimized && <p>Opciones</p>}
         </div>
         <div className="aside-elements">
           <NavLink onClick={handleCloseAsideMobile} to="/">
