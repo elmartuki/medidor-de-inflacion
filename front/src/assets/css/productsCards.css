@@ -1,7 +1,4 @@
 .init-page {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
   width: 100vw;
   overflow-y: scroll;
   height: 100vh;
@@ -13,6 +10,43 @@
   align-self: flex-start;
   width: 95%;
   margin: 20px auto;
+}
+
+.active {
+  background-color: #282828 !important;
+}
+
+.productos-section-btn {
+  width: 95%;
+  display: flex;
+  gap: 10px;
+  margin: -10px auto 15px auto;
+
+  button {
+    background-color: transparent;
+    border: 2px solid #282828;
+    border-radius: 6px;
+    padding: 5px 10px;
+    flex-shrink: 0;
+  }
+}
+.productos-section-filter-1,
+.productos-section-filter-2 {
+  display: flex;
+  width: 95%;
+  margin: -10px auto 5px auto;
+  padding: 10px 0px;
+  overflow-x: scroll;
+  gap: 10px;
+  flex-wrap: nowrap;
+
+  button {
+    background-color: transparent;
+    border: 2px solid #282828;
+    border-radius: 6px;
+    padding: 5px 10px;
+    flex-shrink: 0;
+  }
 }
 
 .productos-section {
@@ -141,11 +175,19 @@
     margin: 20px auto;
   }
 
+  .productos-section-filter-1,
+  .productos-section-filter-2 {
+    overflow-x: hidden;
+
+    flex-wrap: wrap;
+  }
+
   .productos-section {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     row-gap: 20px;
+
     .productos-card_negative,
     .productos-card_positive,
     .productos-card_cero,
