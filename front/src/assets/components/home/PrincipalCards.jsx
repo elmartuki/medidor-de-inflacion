@@ -110,7 +110,7 @@ export default function PrincipalCards({ productos }) {
           }
         >
           <div className="stats-card_title">
-            <p>Variacion Intermensual</p>
+            <p>Variación Intermensual</p>
           </div>
           <div className="stats-card_data">
             <img src={esCero ? igual : esNegativa ? downArrow : upArrow} />
