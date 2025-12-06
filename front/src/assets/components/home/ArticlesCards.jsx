@@ -142,11 +142,9 @@ export default function ArticlesCards({ productos }) {
                   ? "productos-card_positive"
                   : variacion === 0
                   ? "productos-card_cero"
-                  : variacion < 0 && variacion > -20
-                  ? "productos-card_piano"
                   : variacion <= -20
-                  ? "productos-card_negative"
-                  : ""
+                  ? "productos-card_piano"
+                  : "productos-card_negative"
               }
               key={nombre}
             >
