@@ -5,16 +5,17 @@ import volver from "../../img/volver.svg";
 import siguente from "../../img/siguiente.svg";
 import "../../css/productStats.css";
 import { variacionConverter } from "../../services/variacion.js";
-import { useVariacionMensual } from "../../services/useVariacionMensual.js";
 import { useEffect, useState } from "react";
 import { titulos, variacion1, variacion2 } from "../../constants/variacion.js";
 import { getSemanas } from "../../services/getSemanas.js";
+import { calcularIntermensual } from "../../services/variacionIntermensual.js";
 
 export default function PrincipalCards({ productos }) {
   const { semanas } = getSemanas();
   const [semanaIndice, setSemanaIndice] = useState(0);
-  const variacionIntermensual = useVariacionMensual(productos);
   const [indice, setIndice] = useState(0);
+
+  const promedio = calcularIntermensual();
 
   useEffect(() => {
     if (semanas.length > 0) {
@@ -32,11 +33,11 @@ export default function PrincipalCards({ productos }) {
     variacion2[indice]
   );
 
-  const esCero = variacionIntermensual === 0;
-  const esNegativa = variacionIntermensual < 0;
-  const valorIntermensual = variacionIntermensual.toFixed(2);
+  const esCero = promedio === 0;
+  const esNegativa = promedio < 0;
+  const valorIntermensual = promedio;
 
-  const variacionSemanal = variacion.toFixed(2);
+  const variacionSemanal = variacion;
   const esCeroSemanal = variacion === 0;
   const esNegativaSemanal = variacion < 0;
 
