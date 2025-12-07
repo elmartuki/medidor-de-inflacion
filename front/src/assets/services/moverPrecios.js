@@ -1,11 +1,22 @@
 import { BASEURL } from "../db/connectURL";
+import { obtenerDelSessionStorage } from "../utils/localStorage";
 
 export async function updatePriceHistory(onProductUpdate) {
+  const token = obtenerDelSessionStorage("token");
+
+  if (!token) {
+    console.error(
+      "Token no encontrado. Debes iniciar sesion como administrador para poder hacer peticiones"
+    );
+    return false;
+  }
+
   try {
     const response = await fetch(`${BASEURL}/api/productos/move-history`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
