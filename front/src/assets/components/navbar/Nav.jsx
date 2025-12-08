@@ -27,7 +27,7 @@ export default function Nav() {
             )}
           </NavLink>
           <div className="nav-bar-perfil_name">
-            <p>Bievenido de nuevo,</p>
+            <p>Bienvenido de nuevo,</p>
             {admin ? <p>Admin</p> : <p>Usuario</p>}
           </div>
         </div>
