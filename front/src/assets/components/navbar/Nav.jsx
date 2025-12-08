@@ -1,4 +1,4 @@
-import perfilImg from "../../img/perfil.png";
+import perfilImg from "../../img/perfil.svg";
 import "../../css/navbar.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
@@ -23,7 +23,7 @@ export default function Nav() {
             {admin ? (
               <img src="https://images7.memedroid.com/images/UPLOADED667/6888ec184589a.jpeg" />
             ) : (
-              <img src={perfilImg} alt="" />
+              <img style={{ padding: "5px" }} src={perfilImg} alt="" />
             )}
           </NavLink>
           <div className="nav-bar-perfil_name">
