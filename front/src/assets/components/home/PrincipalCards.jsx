@@ -14,6 +14,7 @@ export default function PrincipalCards({ productos }) {
   const { semanas } = getSemanas();
   const [semanaIndice, setSemanaIndice] = useState(0);
   const [indice, setIndice] = useState(0);
+  const [mostrar, setMostrar] = useState(false);
 
   const promedio = calcularIntermensual();
 
@@ -41,87 +42,136 @@ export default function PrincipalCards({ productos }) {
   const esCeroSemanal = variacion === 0;
   const esNegativaSemanal = variacion < 0;
 
-  return (
-    <>
-      <div className="stats-tittle">
-        <p>Panel de precios</p>
-        <p>Resumen de precios y variaciones.</p>
-      </div>
+  const isLoading = productos.length === 0 || semanas.length === 0;
 
-      <section className="stats_section">
-        <article
-          className={
-            esCeroSemanal
-              ? "stats-card-cero"
-              : esNegativaSemanal
-              ? "stats-card-negative"
-              : "stats-card-positive"
-          }
-        >
-          <div className="btn-back">
-            <button
-              onClick={() => {
-                setIndice(Math.max(0, indice - 1));
-              }}
-            >
-              <img src={volver} alt="" />
-            </button>
-          </div>
-          <div className="btn-next">
-            <button
-              onClick={() => {
-                setIndice(Math.min(4, indice + 1));
-              }}
-            >
-              <img src={siguente} alt="" />
-            </button>
-          </div>
+  if (!isLoading) {
+    return (
+      <>
+        <div className="stats-tittle">
+          <p>Panel de precios</p>
+          <p>Resumen de precios y variaciones.</p>
+        </div>
 
-          <div className="stats-card_title">
-            <div>
-              <p>Costo total del carrito: </p>
+        <section className="stats_section">
+          <article
+            className={
+              esCeroSemanal
+                ? "stats-card-cero"
+                : esNegativaSemanal
+                ? "stats-card-negative"
+                : "stats-card-positive"
+            }
+          >
+            <div className="btn-back">
+              <button
+                onClick={() => {
+                  setIndice(Math.max(0, indice - 1));
+                }}
+              >
+                <img src={volver} alt="" />
+              </button>
             </div>
-          </div>
-          <p>{titulos[indice]}</p>
-          <p className="costo-total">${total_hoy.toFixed(2)}</p>
-          <div className="stats-card_data">
-            <div>
+            <div className="btn-next">
+              <button
+                onClick={() => {
+                  setIndice(Math.min(4, indice + 1));
+                }}
+              >
+                <img src={siguente} alt="" />
+              </button>
+            </div>
+
+            <div className="stats-card_title">
               <div>
-                {esCeroSemanal ? (
-                  <img src={igual} alt="Sin variación" />
-                ) : (
-                  <img
-                    src={esNegativaSemanal ? downArrow : upArrow}
-                    alt={esNegativaSemanal ? "Baja" : "Sube"}
-                  />
-                )}
-                <p>{variacionSemanal}%</p>
+                <p>Costo total del carrito: </p>
               </div>
             </div>
-          </div>
-        </article>
+            <p>{titulos[indice]}</p>
+            <p className="costo-total text-fade-in">${total_hoy.toFixed(2)}</p>
+            <div className="stats-card_data">
+              <div>
+                <div>
+                  {esCeroSemanal ? (
+                    <img src={igual} alt="Sin variación" />
+                  ) : (
+                    <img
+                      src={esNegativaSemanal ? downArrow : upArrow}
+                      alt={esNegativaSemanal ? "Baja" : "Sube"}
+                    />
+                  )}
+                  <p className="text-fade-in">{variacionSemanal}%</p>
+                </div>
+              </div>
+            </div>
+          </article>
 
-        <article
-          className={
-            esCero
-              ? "stats-card-cero"
-              : esNegativa
-              ? "stats-card-negative"
-              : "stats-card-positive"
-          }
-        >
-          <div className="stats-card_title">
-            <p>Variación Intermensual</p>
-          </div>
-          <div className="stats-card_data">
-            <img src={esCero ? igual : esNegativa ? downArrow : upArrow} />
-            <p>{valorIntermensual}%</p>
-          </div>
-          <p style={{ fontSize: "16px" }} className="stats-card_data-vs">
-            En comparación de la {nombreSemana}
-          </p>
-        </article>
-      </section>
-    </>
-  );
+          <article
+            className={
+              esCero
+                ? "stats-card-cero"
+                : esNegativa
+                ? "stats-card-negative"
+                : "stats-card-positive"
+            }
+          >
+            <div className="stats-card_title">
+              <p>Variación Intermensual</p>
+            </div>
+            <div className="stats-card_data">
+              <img src={esCero ? igual : esNegativa ? downArrow : upArrow} />
+              <p className="text-fade-in">{valorIntermensual}%</p>
+            </div>
+            <p
+              style={{ fontSize: "16px" }}
+              className="stats-card_data-vs text-fade-in"
+            >
+              En comparación de la {nombreSemana}
+            </p>
+          </article>
+        </section>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="stats-tittle">
+          <p>Panel de precios</p>
+          <p>Resumen de precios y variaciones.</p>
+        </div>
+
+        <section className="stats_section_loading">
+          <article className="stats-card-cero">
+            <div className="stats-card_title">
+              <div>
+                <p>Costo total del carrito: </p>
+              </div>
+            </div>
+            <p>Hoy vs. 1 Semana</p>
+            <p className="costo-total loading-data"></p>
+            <div className="stats-card_data">
+              <div>
+                <div>
+                  <p className="loading-data">...%</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article className="stats-card-cero">
+            <div className="stats-card_title">
+              <p>Variación Intermensual</p>
+            </div>
+            <div className="stats-card_data">
+              <img src={esCero} />
+              <p className="loading-data"></p>
+            </div>
+            <p
+              style={{ fontSize: "16px" }}
+              className="stats-card_data-vs loading-data"
+            ></p>
+          </article>
+        </section>
+      </>
+    );
+  }
 }

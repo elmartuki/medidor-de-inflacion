@@ -31,6 +31,10 @@
     background-color: #202020;
     transition: 0.5s;
 
+    .text-fade-in {
+      animation: fade-in-texto 2s ease 1;
+    }
+
     &:hover {
       transform: scale(1.01);
     }
@@ -54,6 +58,22 @@
         width: 40px;
       }
     }
+
+    .loading-data {
+      width: 100%;
+      height: 30px;
+      animation: text-loadin 5s ease infinite;
+      background: linear-gradient(
+        to right,
+        #383838 0%,
+        #505050 20%,
+        #383838 40%
+      );
+      background-size: 200% 100%;
+      border-radius: 6px;
+      padding: 0px 10px;
+      animation: text-loading 1.5s infinite linear;
+    }
   }
 
   .variaciones-card-negative {
@@ -62,6 +82,16 @@
 
   .variaciones-card-positive {
     border: 3px solid rgba(20, 148, 0, 0.372);
+  }
+}
+
+@keyframes fade-in-texto {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
   }
 }
 
